@@ -10,45 +10,122 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <style>
+      /* Dropdown menu styles for top nav */
+      .top-nav-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 15px;
+      }
+      .top-nav-dropdown .dropdown-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 8px;
+      }
+      .top-nav-dropdown .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        min-width: 140px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 100;
+        border-radius: 6px;
+        margin-top: 6px;
+        padding: 8px 0;
+        right: 0;
+      }
+      .top-nav-dropdown:hover .dropdown-content,
+      .top-nav-dropdown:focus-within .dropdown-content {
+        display: block;
+      }
+      .top-nav-dropdown .dropdown-content a {
+        color: #333;
+        padding: 8px 18px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        transition: background 0.2s;
+      }
+      .top-nav-dropdown .dropdown-content a:hover {
+        background-color: #f0f0f0;
+      }
+      .top-nav-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .top-nav-left h4 {
+        margin: 0 10px 0 0;
+        color: #fff;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <!-- Top Navigation Bar -->
     <div class="top-nav">
       <div class="container">
         <div class="top-nav-left">
-          <h4 data-lang-key="follow_us">Follow us on</h4>
-          <a
-            href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
-            class="social-icon"
-            target="_blank"
-            ><i class="fab fa-facebook"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/maxlidaent/?hl=en"
-            class="social-icon"
-            target="_blank"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <!-- Google Maps icon -->
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=6,+Jln+Dato+Undang+Johol,+Kampung+Kuala+Dioh,+72100+Bahau,+Negeri+Sembilan"
-            class="social-icon"
-            target="_blank"
-            title="Navigate with Google Maps"
-            ><i class="fas fa-map-marker-alt"></i
-          ></a>
-          <!-- Waze icon (make sure images/waze-icon.png exists) -->
-          <a
-            href="https://waze.com/ul?ll=2.818222,102.406944&navigate=yes"
-            class="social-icon"
-            target="_blank"
-            title="Navigate with Waze"
-            ><img
-              src="images/waze-icon.png"
-              alt="Waze"
-              style="height: 20px; vertical-align: middle; margin-bottom: 2px"
-            />
-          </a>
+          <h4 data-lang-key="shop_details">Shop Details :</h4>
+          <div class="top-nav-dropdown">
+            <button class="dropdown-btn">
+              <i class="fas fa-address-book"></i>
+              Contact <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                target="_blank"
+              >
+                <i class="fab fa-facebook"></i> Facebook
+              </a>
+              <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i> Instagram
+              </a>
+            </div>
+          </div>
+          <div class="top-nav-dropdown">
+            <button class="dropdown-btn">
+              <i class="fas fa-map-marked-alt"></i>
+              Navigation <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=6,+Jln+Dato+Undang+Johol,+Kampung+Kuala+Dioh,+72100+Bahau,+Negeri+Sembilan"
+                target="_blank"
+              >
+                <i class="fas fa-map-marker-alt"></i> Google Maps
+              </a>
+              <a
+                href="https://waze.com/ul?ll=2.818222,102.406944&navigate=yes"
+                target="_blank"
+              >
+                <img
+                  src="images/waze-icon.png"
+                  alt="Waze"
+                  style="
+                    height: 18px;
+                    width: 18px;
+                    vertical-align: middle;
+                    margin-right: 2px;
+                  "
+                />
+                Waze
+              </a>
+            </div>
+          </div>
         </div>
         <div class="top-nav-right">
           <div class="language-dropdown">

@@ -531,7 +531,7 @@
             });
 
             // Shipping method selection
-            const deliveryRadio = document.getElementById('delivery');
+const deliveryRadio = document.getElementById('delivery');
             const pickupRadio = document.getElementById('pickup');
             const deliverySection = document.getElementById('delivery-section');
             const pickupSection = document.getElementById('pickup-section');
@@ -540,12 +540,8 @@
                 if (this.checked) {
                     deliverySection.style.display = 'block';
                     pickupSection.style.display = 'none';
-                    
-                    // Update shipping fee in order summary
                     document.querySelector('.summary-row:nth-child(4) span:last-child').textContent = 'RM4.90';
                     document.querySelector('.summary-row:nth-child(5) span:last-child').textContent = 'RM0.29';
-                    
-                    // Update total
                     updateTotal();
                 }
             });
@@ -554,39 +550,22 @@
                 if (this.checked) {
                     deliverySection.style.display = 'none';
                     pickupSection.style.display = 'block';
-                    
-                    // Remove shipping fee in order summary
                     document.querySelector('.summary-row:nth-child(4) span:last-child').textContent = 'RM0.00';
                     document.querySelector('.summary-row:nth-child(5) span:last-child').textContent = 'RM0.00';
-                    
-                    // Update total
                     updateTotal();
                 }
             });
             
             function updateTotal() {
-                // Get merchandise subtotal
                 const merchandiseSubtotal = parseFloat(document.querySelector('.summary-row:nth-child(2) span:last-child').textContent.replace('RM', ''));
-                
-                // Get product care fee
                 const productCareFee = parseFloat(document.querySelector('.summary-row:nth-child(3) span:last-child').textContent.replace('RM', ''));
-                
-                // Get shipping fee
                 const shippingSubtotal = parseFloat(document.querySelector('.summary-row:nth-child(4) span:last-child').textContent.replace('RM', ''));
-                
-                // Get shipping tax
                 const shippingTax = parseFloat(document.querySelector('.summary-row:nth-child(5) span:last-child').textContent.replace('RM', ''));
-                
-                // Check if voucher is applied
                 let voucherDiscount = 0;
                 if (document.getElementById('voucher-applied').style.display === 'block') {
-                    voucherDiscount = 2.70; // 10% of merchandise subtotal (27.00)
+                    voucherDiscount = 2.70;
                 }
-                
-                // Calculate total
                 const total = merchandiseSubtotal + productCareFee + shippingSubtotal + shippingTax - voucherDiscount;
-                
-                // Update total display
                 document.querySelector('.summary-row.total span:last-child').textContent = 'RM' + total.toFixed(2);
             }
 
@@ -615,21 +594,69 @@
                     alert('Invalid voucher code. Please try again.');
                 }
             });
-            
+
             // Place order button
-            const placeOrderBtn = document.querySelector('.checkout-btn');
-            if (placeOrderBtn) {
-                placeOrderBtn.addEventListener('click', function() {
-                    const shippingMethod = document.getElementById('delivery').checked ? 'Delivery' : 'In-Store Pickup';
-                    const hasVoucher = document.getElementById('voucher-applied').style.display === 'block';
-                    let message = 'Order placed successfully with ' + shippingMethod;
-                    if (hasVoucher) {
-                        message += ' and 10% discount voucher applied';
-                    }
-                    alert(message + '! Thank you for shopping with us.');
-                    window.location.href = 'index.html';
-                });
-            }
+const placeOrderBtn = document.querySelector('.checkout-btn');
+if (placeOrderBtn) {
+    placeOrderBtn.addEventListener('click', function() {
+        // --- Store order in localStorage for admin dashboard ---
+        // Generate Order ID
+        const orderId = '#ORD-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 9000 + 1000);
+        // Get customer name from logged in user, fallback to Guest
+        let customerName = 'Guest';
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (loggedInUser) {
+            try {
+                const userObj = JSON.parse(loggedInUser);
+                if (userObj.username) {
+                    customerName = userObj.username;
+                }
+            } catch {}
+        }
+        // Get date
+        const date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        // Get amount (total)
+        const amount = document.querySelector('.summary-row.total span:last-child').textContent;
+        // Save to localStorage
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.unshift({
+            orderId: orderId,
+            customer: customerName,
+            date: date,
+            amount: amount
+        });
+        localStorage.setItem('orders', JSON.stringify(orders));
+        // --- End store order ---
+const order = {
+    orderId,
+    customer: customerName,
+    date,
+    amount: document.querySelector('.summary-row.total span:last-child').textContent
+};
+
+// Get existing orders from localStorage or start with an empty array
+let orders = JSON.parse(localStorage.getItem('orderList')) || [];
+
+// Add the new order
+orders.unshift(order);
+
+// Save back to localStorage
+localStorage.setItem('orderList', JSON.stringify(orders));
+
+// Redirect or confirm
+alert("Order placed successfully!");
+window.location.href = "index.html"; // or wherever you want
+
+        const shippingMethod = document.getElementById('delivery').checked ? 'Delivery' : 'In-Store Pickup';
+        const hasVoucher = document.getElementById('voucher-applied').style.display === 'block';
+        let message = 'Order placed successfully with ' + shippingMethod;
+        if (hasVoucher) {
+            message += ' and 10% discount voucher applied';
+        }
+        alert(message + '! Thank you for shopping with us.');
+        window.location.href = 'index.html';
+    });
+}
         });
 
         function updateLanguage() {
