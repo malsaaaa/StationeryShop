@@ -31,15 +31,11 @@
           ></a>
         </div>
         <div class="top-nav-right">
-          <a href="help.html"
-            ><i class="far fa-question-circle"></i>
-            <span data-lang-key="help">Help</span></a
-          >
           <div class="language-dropdown">
-            <a href="#" class="language-toggle"
-              ><i class="fas fa-globe"></i>
-              <span class="current-lang">English</span></a
-            >
+            <a href="#" class="language-toggle">
+              <i class="fas fa-globe"></i>
+              <span class="current-lang">English</span>
+            </a>
             <div class="language-options">
               <a href="#" class="language-option" data-lang="english"
                 >English</a
@@ -49,10 +45,20 @@
               >
             </div>
           </div>
+          <!-- Move these OUTSIDE the .language-dropdown div -->
+        </div>
+        <span id="nav-auth">
           <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
           <span class="divider">|</span>
           <a href="login.html" data-lang-key="login">Login</a>
-        </div>
+        </span>
+        <span id="nav-profile" style="display: none">
+          <i class="fas fa-user"></i>
+          <span id="profile-username"></span>
+          <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935"
+            >Logout</a
+          >
+        </span>
       </div>
     </div>
 
