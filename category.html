@@ -634,8 +634,6 @@
     <script src="language.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // ...existing language and UI code...
-
         // Filter toggle for mobile
         const filterToggle = document.getElementById("filterToggle");
         const filterSidebar = document.getElementById("filterSidebar");
@@ -645,7 +643,7 @@
           });
         }
 
-        // Category filter logic
+        // Category and price filter logic
         const applyButton = document.querySelector(".filter-button");
         if (applyButton) {
           applyButton.addEventListener("click", function () {
@@ -656,42 +654,59 @@
               )
             ).map((cb) => cb.value);
 
-            // If no category checked, show all
-            if (checkedCategories.length === 0) {
-              document.querySelectorAll(".product-card").forEach((card) => {
-                card.style.display = "block";
-              });
-              return;
-            }
+            // Get price range values
+            const minPrice =
+              parseFloat(document.getElementById("minPrice").value) || 0;
+            const maxPriceInput = document.getElementById("maxPrice").value;
+            const maxPrice = maxPriceInput
+              ? parseFloat(maxPriceInput)
+              : Infinity;
 
             document.querySelectorAll(".product-card").forEach((card) => {
               let show = false;
               const title = card.querySelector("h3")?.textContent || "";
-              // Notebooks filter
-              if (checkedCategories.includes("notebooks")) {
-                if (
-                  /\bNotebooks\b/i.test(title) ||
-                  /\bNotebook\b/i.test(title)
-                ) {
-                  show = true;
+
+              // Get product price (assumes .current-price exists and is formatted like "RM45.90")
+              const priceText =
+                card.querySelector(".current-price")?.textContent || "";
+              const priceMatch = priceText.match(/[\d.]+/);
+              const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+
+              // Category filter
+              if (checkedCategories.length === 0) {
+                show = true; // No category filter, show all (but still filter by price)
+              } else {
+                // Notebooks filter
+                if (checkedCategories.includes("notebooks")) {
+                  if (
+                    /\bNotebooks\b/i.test(title) ||
+                    /\bNotebook\b/i.test(title)
+                  ) {
+                    show = true;
+                  }
+                }
+                // Journals filter
+                if (checkedCategories.includes("journals")) {
+                  if (
+                    /\bJournals\b/i.test(title) ||
+                    /\bJournal\b/i.test(title)
+                  ) {
+                    show = true;
+                  }
+                }
+                // Sketchbook filter
+                if (checkedCategories.includes("sketchbook")) {
+                  if (/\bSketchbook\b/i.test(title)) {
+                    show = true;
+                  }
                 }
               }
-              // Journals filter
-              if (checkedCategories.includes("journals")) {
-                if (/\bJournals\b/i.test(title) || /\bJournal\b/i.test(title)) {
-                  show = true;
-                }
+
+              // Price filter (only show if price is within range)
+              if (show && (price < minPrice || price > maxPrice)) {
+                show = false;
               }
-              // Sketchbook filter
-              if (checkedCategories.includes("sketchbook")) {
-                if (/\bSketchbook\b/i.test(title)) {
-                  show = true;
-                }
-              }
-              // Books filter (show all if "books" is checked)
-              if (checkedCategories.includes("books")) {
-                show = true;
-              }
+
               card.style.display = show ? "block" : "none";
             });
           });
