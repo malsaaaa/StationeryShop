@@ -12,58 +12,6 @@
     />
     <script src="language.js"></script>
     <style>
-      /* Language dropdown styles */
-      .language-dropdown {
-        position: relative;
-        display: inline-block;
-        margin-right: 15px;
-      }
-      
-      .language-toggle {
-        display: flex;
-        align-items: center;
-        color: #333;
-        text-decoration: none;
-        padding: 5px;
-      }
-      
-      .language-toggle .fas {
-        margin-right: 5px;
-      }
-      
-      .language-options {
-        display: none;
-        position: absolute;
-        background-color: white;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-      
-      .language-dropdown:hover .language-options {
-        display: block;
-      }
-      
-      .language-option {
-        color: #333;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        transition: background-color 0.2s;
-      }
-      
-      .language-option:hover {
-        background-color: #f1f1f1;
-      }
-      
-      .language-option.active {
-        background-color: #e6f7ff;
-        font-weight: bold;
-      }
-      
-      /* Login container styles */
       .login-container {
         display: flex;
         min-height: 100vh;
@@ -226,19 +174,9 @@
         </div>
         <!-- Auth links -->
         <span id="nav-auth">
-          <a href="sign_up.html" id="signup-link" data-lang-key="sign_up">Sign Up</a>
+          <a href="sign_up.html" id="signup-link" data-lang-key="sign_up">Sign Up</a> |
+          <a href="login.html" id="login-link" data-lang-key="login">Login</a>
         </span>
-        <span id="nav-profile" style="display: none">
-          <i class="fas fa-user"></i>
-          <span id="profile-username"></span>
-          <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935"
-            >Logout</a
-          >
-        </span>
-      </div>
-      <!-- Profile link (hidden by default) -->
-      <div class="top-nav-right" id="nav-profile">
-        <a href="#" id="profile-link">Profile</a>
       </div>
     </div>
 

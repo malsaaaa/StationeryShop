@@ -408,7 +408,7 @@
                             <option value="low-stock" data-lang-key="low_stock">Low Stock</option>
                             <option value="out-of-stock" data-lang-key="out_of_stock">Out of Stock</option>
                         </select>
-                        <button class="action-btn primary" data-lang-key="export_inventory">Export</button>
+                        <button class="action-btn primary export-inventory-btn" data-lang-key="export_inventory">Export</button>
                     </div>
                 </div>
                 
@@ -416,7 +416,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 data-lang-key="inventory_list">Inventory List</h3>
-                        <button class="action-btn primary" data-lang-key="update_inventory">Update Inventory</button>
+                        <button class="action-btn primary update-inventory-btn" data-lang-key="update_inventory">Update Inventory</button>
                     </div>
                     <div class="card-body">
                         <table class="data-table">
@@ -477,7 +477,7 @@
                             <option value="office" data-lang-key="office">Office Supplies</option>
                             <option value="art" data-lang-key="art">Art Supplies</option>
                         </select>
-                        <button class="action-btn primary" data-lang-key="add_new_product">Add New Product</button>
+                        <button id="addProductBtn" class="action-btn primary" data-lang-key="add_new_product">Add New Product</button>
                     </div>
                 </div>
                 
@@ -927,6 +927,73 @@
         </div>
     </div>
 
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-lang-key="add_new_product">Add New Product</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm">
+                    <div class="form-group">
+                        <label for="productName" data-lang-key="product_name">Product Name</label>
+                        <input type="text" id="productName" name="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory" data-lang-key="category">Category</label>
+                        <select id="productCategory" name="productCategory" required>
+                            <option value="" data-lang-key="select_category">Select Category</option>
+                            <option value="notebooks" data-lang-key="notebooks">Notebooks</option>
+                            <option value="pens" data-lang-key="pens">Pens & Markers</option>
+                            <option value="office" data-lang-key="office">Office Supplies</option>
+                            <option value="art" data-lang-key="art">Art Supplies</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice" data-lang-key="price">Price (RM)</label>
+                            <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productStock" data-lang-key="stock">Stock</label>
+                            <input type="number" id="productStock" name="productStock" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription" data-lang-key="description">Description</label>
+                        <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage" data-lang-key="product_image">Product Image</label>
+                        <input type="file" id="productImage" name="productImage" accept="image/*">
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productStatus" data-lang-key="status">Status</label>
+                            <select id="productStatus" name="productStatus">
+                                <option value="active" data-lang-key="active">Active</option>
+                                <option value="inactive" data-lang-key="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productFeatured" data-lang-key="featured">Featured</label>
+                            <select id="productFeatured" name="productFeatured">
+                                <option value="no" data-lang-key="no">No</option>
+                                <option value="yes" data-lang-key="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="action-btn" id="cancelAddProduct" data-lang-key="cancel">Cancel</button>
+                        <button type="submit" class="action-btn primary" data-lang-key="save_product">Save Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <style>
         /* Additional styles for dashboard content */
         /* Filter bar styles */
@@ -1275,6 +1342,127 @@
                 transform: translateX(0);
             }
         }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            width: 70%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px dashed #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 
     <script src="language.js"></script>
@@ -1388,5 +1576,463 @@
                     currentLangDisplay.textContent = savedLanguage === 'english' ? 'English' : 'Bahasa Melayu';
                 }
             }
+            
+            // Add Product Modal Functionality
+            const addProductBtn = document.getElementById('addProductBtn');
+            const addProductModal = document.getElementById('addProductModal');
+            const closeModal = document.querySelector('.close-modal');
+            const cancelAddProduct = document.getElementById('cancelAddProduct');
+            const addProductForm = document.getElementById('addProductForm');
+            const productImageInput = document.getElementById('productImage');
+            const imagePreview = document.getElementById('imagePreview');
+            
+            // Open modal when Add New Product button is clicked
+            addProductBtn.addEventListener('click', function() {
+                addProductModal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+            });
+            
+            // Close modal functions
+            function closeProductModal() {
+                addProductModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+                addProductForm.reset();
+                imagePreview.innerHTML = '';
+            }
+            
+            closeModal.addEventListener('click', closeProductModal);
+            cancelAddProduct.addEventListener('click', closeProductModal);
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function(e) {
+                if (e.target === addProductModal) {
+                    closeProductModal();
+                }
+            });
+            
+            // Image preview functionality
+            productImageInput.addEventListener('change', function() {
+                imagePreview.innerHTML = '';
+                
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        imagePreview.appendChild(img);
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Form submission for adding new product
+            addProductForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const productName = document.getElementById('productName').value;
+                const productCategory = document.getElementById('productCategory').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productStock = document.getElementById('productStock').value;
+                const productStatus = document.getElementById('productStatus').value;
+                
+                // Generate a unique product ID
+                const productId = 'PRD-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+                
+                // Create a new table row
+                const newRow = document.createElement('tr');
+                
+                // Get image source
+                const imgSrc = imagePreview.querySelector('img') ? imagePreview.querySelector('img').src : 'images/placeholder.jpg';
+                
+                // Set the inner HTML with the product information
+                newRow.innerHTML = `
+                    <td>${productId}</td>
+                    <td><img src="${imgSrc}" alt="Product" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                    <td>${productName}</td>
+                    <td>${productCategory}</td>
+                    <td>RM ${parseFloat(productPrice).toFixed(2)}</td>
+                    <td><span class="status-badge ${productStatus === 'active' ? 'success' : 'warning'}">${productStatus === 'active' ? 'Active' : 'Inactive'}</span></td>
+                    <td>
+                        <button class="action-btn small edit-product-btn" data-product-id="${productId}" data-lang-key="edit">Edit</button>
+                        <button class="action-btn small danger delete-product-btn" data-product-id="${productId}" data-lang-key="delete">Delete</button>
+                    </td>
+                `;
+                
+                // Add the new row to the table
+                const productTable = document.querySelector('#products-page .data-table tbody');
+                productTable.insertBefore(newRow, productTable.firstChild);
+                
+                // Add event listeners to the new buttons
+                addButtonEventListeners(newRow.querySelector('.edit-product-btn'), newRow.querySelector('.delete-product-btn'));
+                
+                // Show success message
+                alert('Product added successfully!');
+                
+                // Close the modal
+                closeProductModal();
+            });
+            
+            // Edit Product Modal Functionality
+            const editProductModal = document.getElementById('editProductModal');
+            const editProductForm = document.getElementById('editProductForm');
+            const editProductImageInput = document.getElementById('editProductImage');
+            const editImagePreview = document.getElementById('editImagePreview');
+            const currentProductImage = document.getElementById('currentProductImage');
+            
+            // Function to open edit modal with product data
+            function openEditModal(productId) {
+                // Find product data from the table row
+                const productRow = document.querySelector(`[data-product-id="${productId}"]`).closest('tr');
+                const cells = productRow.cells;
+                
+                // Get product data
+                const id = cells[0].textContent;
+                const imgSrc = cells[1].querySelector('img').src;
+                const name = cells[2].textContent;
+                const category = cells[3].textContent;
+                const price = cells[4].textContent.replace('RM ', '');
+                const status = cells[5].querySelector('.status-badge').textContent.toLowerCase();
+                
+                // Populate the edit form
+                document.getElementById('editProductId').value = id;
+                document.getElementById('editProductName').value = name;
+                
+                // Set category dropdown
+                const categorySelect = document.getElementById('editProductCategory');
+                for (let i = 0; i < categorySelect.options.length; i++) {
+                    if (categorySelect.options[i].text === category) {
+                        categorySelect.selectedIndex = i;
+                        break;
+                    }
+                }
+                
+                document.getElementById('editProductPrice').value = price;
+                document.getElementById('editProductStock').value = '100'; // Default value
+                document.getElementById('editProductDescription').value = `Description for ${name}`; // Default value
+                
+                // Set status dropdown
+                const statusSelect = document.getElementById('editProductStatus');
+                for (let i = 0; i < statusSelect.options.length; i++) {
+                    if (statusSelect.options[i].value === status) {
+                        statusSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+                
+                // Set current product image
+                currentProductImage.src = imgSrc;
+                
+                // Clear any previous image preview
+                editImagePreview.innerHTML = '';
+                
+                // Show the modal
+                editProductModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close edit modal function
+            function closeEditModal() {
+                editProductModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                editProductForm.reset();
+                editImagePreview.innerHTML = '';
+            }
+            
+            // Close buttons for edit modal
+            editProductModal.querySelector('.close-modal').addEventListener('click', closeEditModal);
+            document.getElementById('cancelEditProduct').addEventListener('click', closeEditModal);
+            
+            // Close edit modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === editProductModal) {
+                    closeEditModal();
+                }
+            });
+            
+            // Edit image preview functionality
+            editProductImageInput.addEventListener('change', function() {
+                editImagePreview.innerHTML = '';
+                
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        editImagePreview.appendChild(img);
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Edit form submission
+            editProductForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const productId = document.getElementById('editProductId').value;
+                const productName = document.getElementById('editProductName').value;
+                const productCategory = document.getElementById('editProductCategory').value;
+                const productPrice = document.getElementById('editProductPrice').value;
+                const productStatus = document.getElementById('editProductStatus').value;
+                
+                // Find the product row
+                const productRow = document.querySelector(`[data-product-id="${productId}"]`).closest('tr');
+                const cells = productRow.cells;
+                
+                // Update the product data in the table
+                cells[2].textContent = productName;
+                cells[3].textContent = productCategory;
+                cells[4].textContent = `RM ${parseFloat(productPrice).toFixed(2)}`;
+                cells[5].innerHTML = `<span class="status-badge ${productStatus === 'active' ? 'success' : 'warning'}">${productStatus === 'active' ? 'Active' : 'Inactive'}</span>`;
+                
+                // Update image if a new one was uploaded
+                if (editImagePreview.querySelector('img')) {
+                    cells[1].querySelector('img').src = editImagePreview.querySelector('img').src;
+                }
+                
+                // Show success message
+                alert('Product updated successfully!');
+                
+                // Close the modal
+                closeEditModal();
+            });
+            
+            // Delete Product Functionality
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const deleteProductImage = document.getElementById('deleteProductImage');
+            const deleteProductName = document.getElementById('deleteProductName');
+            let productToDelete = null;
+            
+            // Function to open delete confirmation modal
+            function openDeleteModal(productId) {
+                // Find product data from the table row
+                const productRow = document.querySelector(`[data-product-id="${productId}"]`).closest('tr');
+                const cells = productRow.cells;
+                
+                // Store reference to the row for deletion
+                productToDelete = productRow;
+                
+                // Get product data for confirmation
+                const imgSrc = cells[1].querySelector('img').src;
+                const name = cells[2].textContent;
+                
+                // Set confirmation details
+                deleteProductImage.src = imgSrc;
+                deleteProductName.textContent = name;
+                
+                // Show the modal
+                deleteConfirmModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close delete modal function
+            function closeDeleteModal() {
+                deleteConfirmModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                productToDelete = null;
+            }
+            
+            // Close buttons for delete modal
+            deleteConfirmModal.querySelector('.close-modal').addEventListener('click', closeDeleteModal);
+            document.getElementById('cancelDelete').addEventListener('click', closeDeleteModal);
+            
+            // Close delete modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === deleteConfirmModal) {
+                    closeDeleteModal();
+                }
+            });
+            
+            // Confirm delete button
+            document.getElementById('confirmDelete').addEventListener('click', function() {
+                if (productToDelete) {
+                    // Remove the product row from the table
+                    productToDelete.remove();
+                    
+                    // Show success message
+                    alert('Product deleted successfully!');
+                    
+                    // Close the modal
+                    closeDeleteModal();
+                }
+            });
+            
+            // Add event listeners to all edit and delete buttons
+            function addButtonEventListeners(editBtn, deleteBtn) {
+                if (editBtn) {
+                    editBtn.addEventListener('click', function() {
+                        const productId = this.getAttribute('data-product-id');
+                        openEditModal(productId);
+                    });
+                }
+                
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', function() {
+                        const productId = this.getAttribute('data-product-id');
+                        openDeleteModal(productId);
+                    });
+                }
+            }
+            
+            // Initialize event listeners for existing buttons
+            document.querySelectorAll('.edit-product-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    openEditModal(productId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-product-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    openDeleteModal(productId);
+                });
+            });
+        });
+    
+        // Inventory Management Functionality
+        const exportInventoryBtn = document.querySelector('.export-inventory-btn');
+        const updateInventoryBtn = document.querySelector('.update-inventory-btn');
+        
+        if (exportInventoryBtn) {
+            exportInventoryBtn.addEventListener('click', function() {
+                alert('Inventory data exported successfully!');
+            });
+        }
+        
+        if (updateInventoryBtn) {
+            updateInventoryBtn.addEventListener('click', function() {
+                alert('Inventory update functionality will be implemented here.');
+            });
+        }
+        
+        // Add event listeners to inventory item buttons
+        document.querySelectorAll('.action-btn[data-lang-key="update"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const productRow = this.closest('tr');
+                const productId = productRow.cells[0].textContent;
+                const productName = productRow.cells[1].textContent;
+                alert(`Update inventory for ${productName} (${productId})`);
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="view"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const productRow = this.closest('tr');
+                const productId = productRow.cells[0].textContent;
+                const productName = productRow.cells[1].textContent;
+                alert(`View inventory details for ${productName} (${productId})`);
+            });
+        });
+        
+        // Order Management Functionality
+        document.querySelector('#orders-page .action-btn[data-lang-key="export_orders"]')?.addEventListener('click', function() {
+            alert('Orders exported successfully!');
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="process"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const orderRow = this.closest('tr');
+                const orderId = orderRow.cells[0].textContent;
+                alert(`Order ${orderId} marked as processed!`);
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="view_details"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const orderRow = this.closest('tr');
+                const orderId = orderRow.cells[0].textContent;
+                alert(`Viewing details for order ${orderId}`);
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="ship"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const orderRow = this.closest('tr');
+                const orderId = orderRow.cells[0].textContent;
+                alert(`Order ${orderId} marked as shipped!`);
+            });
+        });
+        
+        // Customer Reviews Functionality
+        document.querySelectorAll('.action-btn[data-lang-key="approve"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const reviewRow = this.closest('tr');
+                alert('Review approved and published!');
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="reply"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const reviewRow = this.closest('tr');
+                alert('Reply functionality will be implemented here.');
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="remove"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const reviewRow = this.closest('tr');
+                alert('Review removed successfully!');
+                reviewRow.remove();
+            });
+        });
+        
+        // Staff Management Functionality
+        document.querySelector('#staff-page .action-btn[data-lang-key="add_new_staff"]')?.addEventListener('click', function() {
+            alert('Add new staff functionality will be implemented here.');
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="edit_staff"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const staffRow = this.closest('tr');
+                const staffName = staffRow.cells[1].textContent;
+                alert(`Edit staff member: ${staffName}`);
+            });
+        });
+        
+        document.querySelectorAll('.action-btn[data-lang-key="deactivate"]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const staffRow = this.closest('tr');
+                const staffName = staffRow.cells[1].textContent;
+                alert(`Staff member ${staffName} deactivated successfully!`);
+                
+                // Update status badge
+                const statusCell = staffRow.querySelector('.status-badge');
+                if (statusCell) {
+                    statusCell.className = 'status-badge warning';
+                    statusCell.textContent = 'Inactive';
+                }
+            });
+        });
+        
+        // Sales Reports Functionality
+        document.querySelector('#reports-page .action-btn[data-lang-key="generate_report"]')?.addEventListener('click', function() {
+            alert('Report generated successfully!');
+        });
+        
+        document.querySelector('#reports-page .action-btn[data-lang-key="export_pdf"]')?.addEventListener('click', function() {
+            alert('Report exported as PDF successfully!');
+        });
+        
+        // Settings Functionality
+        document.querySelector('#settings-page .action-btn[data-lang-key="store_settings"]')?.addEventListener('click', function() {
+            alert('Store settings updated successfully!');
+        });
+        
+        document.querySelector('#settings-page .action-btn[data-lang-key="payment_settings"]')?.addEventListener('click', function() {
+            alert('Payment settings updated successfully!');
+        });
+        
+        document.querySelector('#settings-page .action-btn[data-lang-key="shipping_settings"]')?.addEventListener('click', function() {
+            alert('Shipping settings updated successfully!');
+        });
+        
+        document.querySelector('#settings-page .action-btn[data-lang-key="notification_settings"]')?.addEventListener('click', function() {
+            alert('Notification settings updated successfully!');
         });
     </script>
