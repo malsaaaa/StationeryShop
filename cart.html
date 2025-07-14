@@ -251,29 +251,49 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
+    <!-- Top Navigation Bar -->
     <div class="top-nav">
         <div class="container">
             <div class="top-nav-left">
-                <a href="index.html" data-lang-key="home">Home</a>
-                <span class="divider">|</span>
-                <a href="#" data-lang-key="follow_us">Follow us on</a>
-                <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" class="social-icon" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/maxlidaent/?hl=en" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="index.html" data-lang-key="home">Home</a>
+            <span class="divider">|</span>
+            <h4 data-lang-key="follow_us">Follow us on</h4>
+            <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                class="social-icon"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+            ></a>
+            <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                class="social-icon"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+            ></a>
             </div>
             <div class="top-nav-right">
-                <a href="help.html"><i class="far fa-question-circle"></i> <span data-lang-key="help">Help</span></a>
-                <div class="language-dropdown">
-                    <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
-                    <div class="language-options">
-                        <a href="#" class="language-option" data-lang="english">English</a>
-                        <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
-                    </div>
+            <div class="language-dropdown">
+                <a href="#" class="language-toggle">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-lang">English</span>
+                </a>
+                <div class="language-options">
+                    <a href="#" class="language-option" data-lang="english">English</a>
+                    <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
                 </div>
+            </div>
+            </div>
+            <span id="nav-auth">
                 <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
                 <span class="divider">|</span>
                 <a href="login.html" data-lang-key="login">Login</a>
-            </div>
+            </span>
+            <span id="nav-profile" style="display: none">
+                <i class="fas fa-user" style="margin-right: 5px"></i>
+                <span id="profile-username"></span>
+                <a href="orders.html" style="margin-left: 10px;" data-lang-key="my_orders">My Orders</a>
+                <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935;" data-lang-key="logout">Logout</a>
+            </span>
         </div>
     </div>
 
@@ -318,35 +338,6 @@
                     <td><input type="checkbox" class="item-checkbox"></td>
                     <td>
                         <div class="cart-product">
-                            <img src="images/fountain_pen.png" alt="Pen" class="cart-product-image">
-                            <div class="cart-product-details">
-                                <h3>Premium Ballpoint Pen - Black</h3>
-                                <div class="cart-product-seller">
-                                    <img src="images/maxlida.png" alt="MAXLIDA">
-                                    <span>MAXLIDA Official Store</span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="cart-price">RM 12.90</td>
-                    <td>
-                        <div class="cart-quantity">
-                            <button class="quantity-decrease">-</button>
-                            <input type="text" value="1" class="quantity-input">
-                            <button class="quantity-increase">+</button>
-                        </div>
-                    </td>
-                    <td class="cart-price">RM 12.90</td>
-                    <td>
-                        <div class="cart-actions">
-                            <a href="#" class="delete-item"><i class="far fa-trash-alt"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="item-checkbox"></td>
-                    <td>
-                        <div class="cart-product">
                             <img src="images/premium_notebook1.png" alt="Notebook" class="cart-product-image">
                             <div class="cart-product-details">
                                 <h3>Hardcover Notebook - A5 Size</h3>
@@ -361,11 +352,11 @@
                     <td>
                         <div class="cart-quantity">
                             <button class="quantity-decrease">-</button>
-                            <input type="text" value="2" class="quantity-input">
+                            <input type="text" value="1" class="quantity-input">
                             <button class="quantity-increase">+</button>
                         </div>
                     </td>
-                    <td class="cart-price">RM 49.00</td>
+                    <td class="cart-price">RM 24.50</td>
                     <td>
                         <div class="cart-actions">
                             <a href="#" class="delete-item"><i class="far fa-trash-alt"></i></a>
@@ -375,24 +366,48 @@
             </tbody>
         </table>
         
+        <!-- Empty Cart Message -->
+        <div id="empty-cart-message" style="display: none; text-align: center; padding: 40px 0; margin: 20px auto; max-width: 500px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <img src="images/empty-cart.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2038/2038854.png'" alt="Empty Cart" style="width: 120px; margin-bottom: 20px; opacity: 0.6;">
+            <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;" data-lang-key="cart_empty">Your cart is empty</h2>
+            <p style="color: #666; margin-bottom: 20px;" data-lang-key="cart_empty_message">Looks like you haven't added any items to your cart yet.</p>
+            <a href="index.html" class="btn" style="display: inline-block; margin-top: 10px; padding: 12px 24px; background-color: #1a73e8; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;" data-lang-key="continue_shopping">Continue Shopping</a>
+        </div>
+        
         <!-- Cart Summary -->
         <div class="cart-summary">
             <div class="voucher-section">
-                <input type="text" class="voucher-input" placeholder="Enter voucher code" data-lang-key="voucher_placeholder" data-lang-attr="placeholder">
-                <button class="voucher-button" data-lang-key="apply">Apply</button>
+                <input type="text" class="voucher-input" placeholder="Enter voucher code" data-lang-key="voucher_placeholder" data-lang-attr="placeholder" value="MAXLIDA10">
+                <button class="voucher-button" data-lang-key="apply" id="apply-voucher">Apply</button>
+            </div>
+            <div class="applied-voucher" style="display: none; margin-top: 10px; background-color: #e8f5e9; padding: 8px 12px; border-radius: 4px; font-size: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <i class="fas fa-ticket-alt" style="color: #4caf50; margin-right: 5px;"></i>
+                        <span class="voucher-code">MAXLIDA10</span>
+                        <span> - 10% OFF</span>
+                    </div>
+                    <button class="remove-voucher" style="background: none; border: none; color: #f44336; cursor: pointer;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="cart-summary-row">
                 <span data-lang-key="subtotal">Subtotal</span>
-                <span>RM 61.90</span>
+                <span class="subtotal-amount">RM 24.50</span>
             </div>
             <div class="cart-summary-row">
                 <span data-lang-key="shipping">Shipping</span>
-                <span>RM 5.00</span>
+                <span class="shipping-amount">RM 5.00</span>
+            </div>
+            <div class="cart-summary-row voucher-discount" style="display: none; color: #4caf50;">
+                <span data-lang-key="voucher_discount">Voucher Discount</span>
+                <span class="discount-amount">- RM 2.45</span>
             </div>
             <div class="cart-summary-row total">
                 <span data-lang-key="total">Total</span>
-                <span>RM 66.90</span>
+                <span class="total-amount">RM 29.50</span>
             </div>
             
             <a href="checkout.html" class="checkout-button" data-lang-key="checkout">Checkout</a>
@@ -404,6 +419,255 @@
         </div>
     </div>
 
+    <!-- Cart and Voucher Functionality Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const applyVoucherBtn = document.getElementById('apply-voucher');
+            const voucherInput = document.querySelector('.voucher-input');
+            const appliedVoucherDiv = document.querySelector('.applied-voucher');
+            const removeVoucherBtn = document.querySelector('.remove-voucher');
+            const voucherDiscountRow = document.querySelector('.voucher-discount');
+            const subtotalAmount = document.querySelector('.subtotal-amount');
+            const discountAmount = document.querySelector('.discount-amount');
+            const totalAmount = document.querySelector('.total-amount');
+            const shippingAmount = document.querySelector('.shipping-amount');
+            const selectAllCheckbox = document.getElementById('select-all');
+            const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+            const itemRows = document.querySelectorAll('.cart-table tbody tr');
+            const cartTable = document.querySelector('.cart-table');
+            const cartSummary = document.querySelector('.cart-summary');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const deleteButtons = document.querySelectorAll('.delete-item');
+            
+            // Get numeric value from price string (e.g., "RM 24.50" -> 24.50)
+            function getPriceValue(priceString) {
+                return parseFloat(priceString.replace('RM', '').trim());
+            }
+            
+            // Format price value to string (e.g., 24.50 -> "RM 24.50")
+            function formatPrice(value) {
+                return `RM ${value.toFixed(2)}`;
+            }
+            
+            // Calculate subtotal based on checked items
+            function calculateSubtotal() {
+                let subtotal = 0;
+                
+                itemCheckboxes.forEach((checkbox, index) => {
+                    if (checkbox.checked) {
+                        const row = itemRows[index];
+                        const itemTotalCell = row.querySelector('td:nth-child(5)');
+                        const itemPrice = getPriceValue(itemTotalCell.textContent);
+                        subtotal += itemPrice;
+                    }
+                });
+                
+                return subtotal;
+            }
+            
+            // Calculate and update totals
+            function updateTotals(applyDiscount = false) {
+                const subtotal = calculateSubtotal();
+                const shipping = subtotal > 0 ? getPriceValue(shippingAmount.textContent) : 0;
+                let total = subtotal + shipping;
+                
+                // Update subtotal display
+                subtotalAmount.textContent = formatPrice(subtotal);
+                
+                if (applyDiscount && subtotal > 0) {
+                    // Apply 10% discount
+                    const discount = subtotal * 0.1;
+                    discountAmount.textContent = `- ${formatPrice(discount)}`;
+                    total -= discount;
+                    voucherDiscountRow.style.display = 'flex';
+                } else if (applyDiscount) {
+                    // Keep voucher row visible but with 0 discount if no items selected
+                    discountAmount.textContent = `- ${formatPrice(0)}`;
+                    voucherDiscountRow.style.display = 'flex';
+                } else {
+                    voucherDiscountRow.style.display = 'none';
+                }
+                
+                totalAmount.textContent = formatPrice(total);
+            }
+            
+            // Handle checkbox changes
+            function handleCheckboxChange() {
+                // Check if voucher is applied
+                const isVoucherApplied = appliedVoucherDiv.style.display === 'block';
+                updateTotals(isVoucherApplied);
+            }
+            
+            // Select All checkbox functionality
+            selectAllCheckbox.addEventListener('change', function() {
+                const isChecked = this.checked;
+                
+                // Update all item checkboxes
+                itemCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+                
+                // Update totals
+                handleCheckboxChange();
+            });
+            
+            // Individual checkbox functionality
+            itemCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Update select all checkbox
+                    const allChecked = Array.from(itemCheckboxes).every(cb => cb.checked);
+                    selectAllCheckbox.checked = allChecked;
+                    
+                    // Update totals
+                    handleCheckboxChange();
+                });
+            });
+            
+            // Apply voucher
+            applyVoucherBtn.addEventListener('click', function() {
+                const voucherCode = voucherInput.value.trim();
+                
+                if (voucherCode === 'MAXLIDA10') {
+                    appliedVoucherDiv.style.display = 'block';
+                    updateTotals(true);
+                    
+                    // Show success message
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'voucher-success';
+                    successMsg.style.color = '#4caf50';
+                    successMsg.style.marginTop = '5px';
+                    successMsg.style.fontSize = '14px';
+                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Voucher applied successfully!';
+                    
+                    // Remove any existing success message
+                    const existingMsg = document.querySelector('.voucher-success');
+                    if (existingMsg) existingMsg.remove();
+                    
+                    // Add the new success message
+                    document.querySelector('.voucher-section').appendChild(successMsg);
+                    
+                    // Hide message after 3 seconds
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    // Show error message
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'voucher-error';
+                    errorMsg.style.color = '#f44336';
+                    errorMsg.style.marginTop = '5px';
+                    errorMsg.style.fontSize = '14px';
+                    errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid voucher code';
+                    
+                    // Remove any existing error message
+                    const existingMsg = document.querySelector('.voucher-error');
+                    if (existingMsg) existingMsg.remove();
+                    
+                    // Add the new error message
+                    document.querySelector('.voucher-section').appendChild(errorMsg);
+                    
+                    // Hide message after 3 seconds
+                    setTimeout(() => {
+                        errorMsg.style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Remove voucher
+            removeVoucherBtn.addEventListener('click', function() {
+                appliedVoucherDiv.style.display = 'none';
+                voucherInput.value = '';
+                updateTotals(false);
+                
+                // Remove any messages
+                const messages = document.querySelectorAll('.voucher-success, .voucher-error');
+                messages.forEach(msg => msg.remove());
+            });
+            
+            // Initialize with all items checked
+            selectAllCheckbox.checked = true;
+            itemCheckboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            // Check if cart is empty and show/hide elements accordingly
+            function checkCartEmpty() {
+                const remainingItems = document.querySelectorAll('.cart-table tbody tr');
+                console.log('Checking cart empty state. Items remaining:', remainingItems.length);
+                
+                if (remainingItems.length === 0) {
+                    // Show empty cart message
+                    console.log('Cart is empty, showing empty cart message');
+                    emptyCartMessage.style.display = 'block';
+                    
+                    // Hide cart table and summary
+                    cartTable.style.display = 'none';
+                    cartSummary.style.display = 'none';
+                    
+                    // Create an empty row to ensure the table body exists for future operations
+                    const tbody = document.querySelector('.cart-table tbody');
+                    if (tbody) {
+                        // Clear any remaining content
+                        tbody.innerHTML = '';
+                    }
+                } else {
+                    // Hide empty cart message
+                    console.log('Cart has items, hiding empty cart message');
+                    emptyCartMessage.style.display = 'none';
+                    
+                    // Show cart table and summary
+                    cartTable.style.display = 'table';
+                    cartSummary.style.display = 'block';
+                }
+            }
+            
+            // Delete item functionality
+            function setupDeleteButtons() {
+                const deleteButtons = document.querySelectorAll('.delete-item');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Get the row to remove
+                        const row = this.closest('tr');
+                        
+                        // Remove the row directly without confirmation
+                        if (row) {
+                            row.remove();
+                            
+                            // Get the tbody element
+                            const tbody = document.querySelector('.cart-table tbody');
+                            
+                            // Check if there are any rows left
+                            if (tbody && tbody.children.length === 0) {
+                                // No items left, show empty cart message
+                                document.getElementById('empty-cart-message').style.display = 'block';
+                                document.querySelector('.cart-table').style.display = 'none';
+                                document.querySelector('.cart-summary').style.display = 'none';
+                            } else {
+                                // Update checkboxes and select all reference
+                                const updatedCheckboxes = document.querySelectorAll('.item-checkbox');
+                                
+                                // Update totals
+                                updateTotals(appliedVoucherDiv.style.display === 'block');
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Initialize delete buttons
+            setupDeleteButtons();
+            
+            // Initialize totals
+            updateTotals(false);
+            
+            // Check if cart is empty on page load
+            checkCartEmpty();
+        });
+    </script>
+    
     <!-- Footer -->
     <footer>
         <div class="container" style="text-align: center;">

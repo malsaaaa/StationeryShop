@@ -12,6 +12,57 @@
     />
     <script src="language.js"></script>
     <style>
+      /* Language dropdown styles */
+      .language-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 15px;
+      }
+      
+      .language-toggle {
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-decoration: none;
+        padding: 5px;
+      }
+      
+      .language-toggle .fas {
+        margin-right: 5px;
+      }
+      
+      .language-options {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      
+      .language-dropdown:hover .language-options {
+        display: block;
+      }
+      
+      .language-option {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.2s;
+      }
+      
+      .language-option:hover {
+        background-color: #f1f1f1;
+      }
+      
+      .language-option.active {
+        background-color: #e6f7ff;
+        font-weight: bold;
+      }
+      
       /* Sign Up page specific styles */
       .signup-container {
         display: flex;
@@ -142,6 +193,17 @@
         <span data-lang-key="shop_name">MAXLIDA Stationery</span>
       </div>
       <div class="top-nav-right">
+        <!-- Language Dropdown -->
+        <div class="language-dropdown">
+          <a href="#" class="language-toggle">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">English</span>
+          </a>
+          <div class="language-options">
+            <a href="#" class="language-option" data-lang="english">English</a>
+            <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+          </div>
+        </div>
         <a href="login.html" data-lang-key="login">Login</a>
       </div>
     </div>

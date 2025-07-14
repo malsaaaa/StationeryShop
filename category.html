@@ -655,12 +655,14 @@
             ).map((cb) => cb.value);
 
             // Get price range values
-            const minPrice =
-              parseFloat(document.getElementById("minPrice").value) || 0;
-            const maxPriceInput = document.getElementById("maxPrice").value;
-            const maxPrice = maxPriceInput
-              ? parseFloat(maxPriceInput)
-              : Infinity;
+            const minPriceInput = document.getElementById("minPrice").value.trim();
+            const maxPriceInput = document.getElementById("maxPrice").value.trim();
+            
+            // Parse price values, handling empty inputs
+            const minPrice = minPriceInput ? parseFloat(minPriceInput) : 0;
+            const maxPrice = maxPriceInput ? parseFloat(maxPriceInput) : Infinity;
+            
+            console.log(`Filter - Min Price: ${minPrice}, Max Price: ${maxPrice}`); // Debug logging
 
             document.querySelectorAll(".product-card").forEach((card) => {
               let show = false;
@@ -669,8 +671,11 @@
               // Get product price (assumes .current-price exists and is formatted like "RM45.90")
               const priceText =
                 card.querySelector(".current-price")?.textContent || "";
-              const priceMatch = priceText.match(/[\d.]+/);
+              // Extract numbers from the price text (improved regex to handle all formats)
+              // This regex will find any number with optional decimal point and decimal digits
+              const priceMatch = priceText.match(/\d+(\.\d+)?/);
               const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+              console.log(`Product: ${title}, Price text: ${priceText}, Extracted price: ${price}`); // Debug logging
 
               // Category filter
               if (checkedCategories.length === 0) {
@@ -703,8 +708,19 @@
               }
 
               // Price filter (only show if price is within range)
-              if (show && (price < minPrice || price > maxPrice)) {
-                show = false;
+              // Check if price is outside the specified range
+              if (show) {
+                // Check minimum price
+                if (price < minPrice) {
+                  show = false;
+                  console.log(`Hiding ${title} - price ${price} below min ${minPrice}`);
+                }
+                
+                // Check maximum price (only if a max price was specified)
+                if (maxPriceInput && price > maxPrice) {
+                  show = false;
+                  console.log(`Hiding ${title} - price ${price} above max ${maxPrice}`);
+                }
               }
 
               card.style.display = show ? "block" : "none";
