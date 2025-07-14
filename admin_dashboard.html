@@ -187,7 +187,7 @@
 </head>
 <body>
     <!-- Header with language switcher -->
-    <div class="header-login" style="position: fixed; top: 0; right: 0; z-index: 1000; background: transparent; box-shadow: none; padding: 10px;">
+    <div class="header-login" style="position: fixed; top: 0; right: 0; z-index: 1000; background: transparent; box-shadow: none; padding: 10px;"></div>
         <div class="top-nav-right">
             <div class="language-dropdown">
                 <div class="language-toggle">
@@ -242,6 +242,10 @@
                 <div class="menu-item" data-page="settings">
                     <i class="fas fa-cog"></i>
                     <span data-lang-key="settings">Settings</span>
+                </div>
+                <div class="menu-item" data-page="accounts">
+                    <i class="fas fa-user-shield"></i>
+                    <span data-lang-key="account_management">Account Management</span>
                 </div>
                 <div class="menu-item" id="logout">
                     <i class="fas fa-sign-out-alt"></i>
@@ -757,6 +761,231 @@
                 </div>
             </div>
             
+
+            <!-- Account Management Page -->
+<div class="dashboard-content" id="accounts-page" style="display: none;">
+    <h2 data-lang-key="account_management">Account Management</h2>
+    
+    <!-- Account Filter and Search -->
+    <div class="filter-bar">
+        <input type="text" placeholder="Search accounts..." class="search-input" data-lang-key="search_accounts_placeholder">
+        <div class="filter-options">
+            <select>
+                <option value="all" data-lang-key="all_accounts">All Accounts</option>
+                <option value="customer" data-lang-key="customer_accounts">Customer</option>
+                <option value="staff" data-lang-key="staff_accounts">Staff</option>
+                <option value="admin" data-lang-key="admin_accounts">Admin</option>
+            </select>
+            <select>
+                <option value="all" data-lang-key="all_status">All Status</option>
+                <option value="active" data-lang-key="active">Active</option>
+                <option value="inactive" data-lang-key="inactive">Inactive</option>
+                <option value="locked" data-lang-key="locked">Locked</option>
+            </select>
+            <button class="action-btn primary" id="addAccountBtn" data-lang-key="add_new_account">Add New Account</button>
+        </div>
+    </div>
+    
+    <!-- Accounts Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 data-lang-key="registered_accounts">Registered Accounts</h3>
+        </div>
+        <div class="card-body">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th data-lang-key="account_id">Account ID</th>
+                        <th data-lang-key="name">Name</th>
+                        <th data-lang-key="email">Email</th>
+                        <th data-lang-key="role">Role</th>
+                        <th data-lang-key="registration_date">Registration Date</th>
+                        <th data-lang-key="last_login">Last Login</th>
+                        <th data-lang-key="status">Status</th>
+                        <th data-lang-key="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ACC-001</td>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>Customer</td>
+                        <td>2023-01-15</td>
+                        <td>2023-07-10</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td>
+                            <button class="action-btn small edit-account-btn" data-account-id="ACC-001" data-lang-key="edit">Edit</button>
+                            <button class="action-btn small danger deactivate-account-btn" data-account-id="ACC-001" data-lang-key="deactivate">Deactivate</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ACC-002</td>
+                        <td>Jane Smith</td>
+                        <td>jane.smith@example.com</td>
+                        <td>Staff</td>
+                        <td>2023-02-20</td>
+                        <td>2023-07-12</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td>
+                            <button class="action-btn small edit-account-btn" data-account-id="ACC-002" data-lang-key="edit">Edit</button>
+                            <button class="action-btn small danger deactivate-account-btn" data-account-id="ACC-002" data-lang-key="deactivate">Deactivate</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ACC-003</td>
+                        <td>Robert Johnson</td>
+                        <td>robert.johnson@example.com</td>
+                        <td>Customer</td>
+                        <td>2023-03-05</td>
+                        <td>2023-06-28</td>
+                        <td><span class="status-badge warning">Inactive</span></td>
+                        <td>
+                            <button class="action-btn small edit-account-btn" data-account-id="ACC-003" data-lang-key="edit">Edit</button>
+                            <button class="action-btn small success activate-account-btn" data-account-id="ACC-003" data-lang-key="activate">Activate</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ACC-004</td>
+                        <td>Sarah Williams</td>
+                        <td>sarah.williams@example.com</td>
+                        <td>Admin</td>
+                        <td>2023-01-10</td>
+                        <td>2023-07-14</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td>
+                            <button class="action-btn small edit-account-btn" data-account-id="ACC-004" data-lang-key="edit">Edit</button>
+                            <button class="action-btn small danger deactivate-account-btn" data-account-id="ACC-004" data-lang-key="deactivate">Deactivate</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ACC-005</td>
+                        <td>Michael Brown</td>
+                        <td>michael.brown@example.com</td>
+                        <td>Customer</td>
+                        <td>2023-04-18</td>
+                        <td>2023-05-30</td>
+                        <td><span class="status-badge danger">Locked</span></td>
+                        <td>
+                            <button class="action-btn small edit-account-btn" data-account-id="ACC-005" data-lang-key="edit">Edit</button>
+                            <button class="action-btn small success unlock-account-btn" data-account-id="ACC-005" data-lang-key="unlock">Unlock</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Account Modal -->
+<div id="addAccountModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 data-lang-key="add_new_account">Add New Account</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="addAccountForm">
+                <div class="form-group">
+                    <label data-lang-key="full_name">Full Name</label>
+                    <input type="text" id="newAccountName" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="email">Email</label>
+                    <input type="email" id="newAccountEmail" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="password">Password</label>
+                    <input type="password" id="newAccountPassword" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="confirm_password">Confirm Password</label>
+                    <input type="password" id="newAccountConfirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="role">Role</label>
+                    <select id="newAccountRole" required>
+                        <option value="customer" data-lang-key="customer">Customer</option>
+                        <option value="staff" data-lang-key="staff">Staff</option>
+                        <option value="admin" data-lang-key="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="status">Status</label>
+                    <select id="newAccountStatus" required>
+                        <option value="active" data-lang-key="active">Active</option>
+                        <option value="inactive" data-lang-key="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="action-btn secondary" id="cancelAddAccount" data-lang-key="cancel">Cancel</button>
+                    <button type="submit" class="action-btn primary" data-lang-key="add_account">Add Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Account Modal -->
+<div id="editAccountModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 data-lang-key="edit_account">Edit Account</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="editAccountForm">
+                <input type="hidden" id="editAccountId">
+                <div class="form-group">
+                    <label data-lang-key="full_name">Full Name</label>
+                    <input type="text" id="editAccountName" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="email">Email</label>
+                    <input type="email" id="editAccountEmail" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="role">Role</label>
+                    <select id="editAccountRole" required>
+                        <option value="customer" data-lang-key="customer">Customer</option>
+                        <option value="staff" data-lang-key="staff">Staff</option>
+                        <option value="admin" data-lang-key="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="status">Status</label>
+                    <select id="editAccountStatus" required>
+                        <option value="active" data-lang-key="active">Active</option>
+                        <option value="inactive" data-lang-key="inactive">Inactive</option>
+                        <option value="locked" data-lang-key="locked">Locked</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="change_password">Change Password</label>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="changePasswordCheckbox">
+                        <label for="changePasswordCheckbox" data-lang-key="change_password_checkbox">Change password for this account</label>
+                    </div>
+                </div>
+                <div id="passwordFields" style="display: none;">
+                    <div class="form-group">
+                        <label data-lang-key="new_password">New Password</label>
+                        <input type="password" id="editAccountPassword">
+                    </div>
+                    <div class="form-group">
+                        <label data-lang-key="confirm_new_password">Confirm New Password</label>
+                        <input type="password" id="editAccountConfirmPassword">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="action-btn secondary" id="cancelEditAccount" data-lang-key="cancel">Cancel</button>
+                    <button type="submit" class="action-btn primary" data-lang-key="save_changes">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
             <!-- Sales Reports Page -->
             <div class="dashboard-content" id="reports-page" style="display: none;">
                 <h2 data-lang-key="sales_reports">Sales Reports</h2>
@@ -2034,5 +2263,356 @@
         
         document.querySelector('#settings-page .action-btn[data-lang-key="notification_settings"]')?.addEventListener('click', function() {
             alert('Notification settings updated successfully!');
+        });  
+        // Account Management JavaScript
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize account management functionality
+        initAccountManagement();
+    });
+    
+    function initAccountManagement() {
+        // Add event listeners to account management buttons
+        addAccountButtonListeners();
+        
+        // Initialize modals
+        initAccountModals();
+    }
+    
+    function addAccountButtonListeners() {
+        // Add Account button
+        const addAccountBtn = document.getElementById('addAccountBtn');
+        if (addAccountBtn) {
+            addAccountBtn.addEventListener('click', function() {
+                openAddAccountModal();
+            });
+        }
+        
+        // Edit Account buttons
+        const editAccountBtns = document.querySelectorAll('.edit-account-btn');
+        editAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountId = this.getAttribute('data-account-id');
+                openEditAccountModal(accountId);
+            });
         });
-    </script>
+        
+        // Deactivate Account buttons
+        const deactivateAccountBtns = document.querySelectorAll('.deactivate-account-btn');
+        deactivateAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountId = this.getAttribute('data-account-id');
+                deactivateAccount(accountId);
+            });
+        });
+        
+        // Activate Account buttons
+        const activateAccountBtns = document.querySelectorAll('.activate-account-btn');
+        activateAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountId = this.getAttribute('data-account-id');
+                activateAccount(accountId);
+            });
+        });
+        
+        // Unlock Account buttons
+        const unlockAccountBtns = document.querySelectorAll('.unlock-account-btn');
+        unlockAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountId = this.getAttribute('data-account-id');
+                unlockAccount(accountId);
+            });
+        });
+    }
+    
+    function initAccountModals() {
+        // Add Account Modal
+        const addAccountModal = document.getElementById('addAccountModal');
+        if (addAccountModal) {
+            const closeAddModal = addAccountModal.querySelector('.close-modal');
+            const cancelAddAccount = document.getElementById('cancelAddAccount');
+            
+            closeAddModal.addEventListener('click', closeAddAccountModal);
+            cancelAddAccount.addEventListener('click', closeAddAccountModal);
+            
+            // Form submission
+            const addAccountForm = document.getElementById('addAccountForm');
+            addAccountForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewAccount();
+            });
+        }
+        
+        // Edit Account Modal
+        const editAccountModal = document.getElementById('editAccountModal');
+        if (editAccountModal) {
+            const closeEditModal = editAccountModal.querySelector('.close-modal');
+            const cancelEditAccount = document.getElementById('cancelEditAccount');
+            
+            closeEditModal.addEventListener('click', closeEditAccountModal);
+            cancelEditAccount.addEventListener('click', closeEditAccountModal);
+            
+            // Password change checkbox
+            const changePasswordCheckbox = document.getElementById('changePasswordCheckbox');
+            const passwordFields = document.getElementById('passwordFields');
+            
+            changePasswordCheckbox.addEventListener('change', function() {
+                passwordFields.style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Form submission
+            const editAccountForm = document.getElementById('editAccountForm');
+            editAccountForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveAccountChanges();
+            });
+        }
+    }
+    
+    // Modal Functions
+    function openAddAccountModal() {
+        const modal = document.getElementById('addAccountModal');
+        modal.style.display = 'block';
+        
+        // Reset form
+        document.getElementById('addAccountForm').reset();
+    }
+    
+    function closeAddAccountModal() {
+        const modal = document.getElementById('addAccountModal');
+        modal.style.display = 'none';
+    }
+    
+    function openEditAccountModal(accountId) {
+        const modal = document.getElementById('editAccountModal');
+        modal.style.display = 'block';
+        
+        // Reset form and hide password fields
+        document.getElementById('editAccountForm').reset();
+        document.getElementById('passwordFields').style.display = 'none';
+        document.getElementById('changePasswordCheckbox').checked = false;
+        
+        // Set account ID
+        document.getElementById('editAccountId').value = accountId;
+        
+        // For demonstration, populate with mock data based on accountId
+        // In a real application, this would fetch data from the server or LocalDB
+        populateEditForm(accountId);
+    }
+    
+    function closeEditAccountModal() {
+        const modal = document.getElementById('editAccountModal');
+        modal.style.display = 'none';
+    }
+    
+    // Account Actions
+    function addNewAccount() {
+        // Get form values
+        const name = document.getElementById('newAccountName').value;
+        const email = document.getElementById('newAccountEmail').value;
+        const password = document.getElementById('newAccountPassword').value;
+        const confirmPassword = document.getElementById('newAccountConfirmPassword').value;
+        const role = document.getElementById('newAccountRole').value;
+        const status = document.getElementById('newAccountStatus').value;
+        
+        // Validate passwords match
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        
+        // For demonstration purposes, show an alert with the account details
+        alert(`New account would be created with:\nName: ${name}\nEmail: ${email}\nRole: ${role}\nStatus: ${status}`);
+        
+        // In a real application, this would save to the server or LocalDB
+        // saveAccountToDatabase(name, email, password, role, status);
+        
+        // Close modal
+        closeAddAccountModal();
+    }
+    
+    function saveAccountChanges() {
+        // Get form values
+        const accountId = document.getElementById('editAccountId').value;
+        const name = document.getElementById('editAccountName').value;
+        const email = document.getElementById('editAccountEmail').value;
+        const role = document.getElementById('editAccountRole').value;
+        const status = document.getElementById('editAccountStatus').value;
+        
+        // Check if password change is requested
+        const changePassword = document.getElementById('changePasswordCheckbox').checked;
+        let passwordChangeInfo = '';
+        
+        if (changePassword) {
+            const password = document.getElementById('editAccountPassword').value;
+            const confirmPassword = document.getElementById('editAccountConfirmPassword').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            passwordChangeInfo = '\nPassword: Changed';
+        }
+        
+        // For demonstration purposes, show an alert with the account details
+        alert(`Account ${accountId} would be updated with:\nName: ${name}\nEmail: ${email}\nRole: ${role}\nStatus: ${status}${passwordChangeInfo}`);
+        
+        // In a real application, this would save to the server or LocalDB
+        // updateAccountInDatabase(accountId, name, email, role, status, changePassword ? password : null);
+        
+        // Update the UI to reflect changes
+        updateAccountRow(accountId, name, email, role, status);
+        
+        // Close modal
+        closeEditAccountModal();
+    }
+    
+    function deactivateAccount(accountId) {
+        // For demonstration purposes, show a confirmation alert
+        if (confirm(`Are you sure you want to deactivate account ${accountId}?`)) {
+            // In a real application, this would update the server or LocalDB
+            // updateAccountStatus(accountId, 'inactive');
+            
+            // Update the UI to reflect the change
+            const statusCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('tr').querySelector('.status-badge');
+            statusCell.className = 'status-badge warning';
+            statusCell.textContent = 'Inactive';
+            
+            // Update the button to be an activate button
+            const actionCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('td');
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small success activate-account-btn" data-account-id="${accountId}" data-lang-key="activate">Activate</button>
+            `;
+            
+            // Re-add event listeners to the new buttons
+            addAccountButtonListeners();
+            
+            alert(`Account ${accountId} has been deactivated.`);
+        }
+    }
+    
+    function activateAccount(accountId) {
+        // For demonstration purposes, show a confirmation alert
+        if (confirm(`Are you sure you want to activate account ${accountId}?`)) {
+            // In a real application, this would update the server or LocalDB
+            // updateAccountStatus(accountId, 'active');
+            
+            // Update the UI to reflect the change
+            const statusCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('tr').querySelector('.status-badge');
+            statusCell.className = 'status-badge success';
+            statusCell.textContent = 'Active';
+            
+            // Update the button to be a deactivate button
+            const actionCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('td');
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small danger deactivate-account-btn" data-account-id="${accountId}" data-lang-key="deactivate">Deactivate</button>
+            `;
+            
+            // Re-add event listeners to the new buttons
+            addAccountButtonListeners();
+            
+            alert(`Account ${accountId} has been activated.`);
+        }
+    }
+    
+    function unlockAccount(accountId) {
+        // For demonstration purposes, show a confirmation alert
+        if (confirm(`Are you sure you want to unlock account ${accountId}?`)) {
+            // In a real application, this would update the server or LocalDB
+            // updateAccountStatus(accountId, 'active');
+            
+            // Update the UI to reflect the change
+            const statusCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('tr').querySelector('.status-badge');
+            statusCell.className = 'status-badge success';
+            statusCell.textContent = 'Active';
+            
+            // Update the button to be a deactivate button
+            const actionCell = document.querySelector(`button[data-account-id="${accountId}"]`).closest('td');
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small danger deactivate-account-btn" data-account-id="${accountId}" data-lang-key="deactivate">Deactivate</button>
+            `;
+            
+            // Re-add event listeners to the new buttons
+            addAccountButtonListeners();
+            
+            alert(`Account ${accountId} has been unlocked.`);
+        }
+    }
+    
+    // Helper Functions
+    function populateEditForm(accountId) {
+        // In a real application, this would fetch data from the server or LocalDB
+        // For demonstration, use mock data based on the accountId
+        
+        // Find the row with the matching accountId
+        const row = document.querySelector(`button[data-account-id="${accountId}"]`).closest('tr');
+        const cells = row.querySelectorAll('td');
+        
+        // Populate form fields with data from the table
+        document.getElementById('editAccountName').value = cells[1].textContent;
+        document.getElementById('editAccountEmail').value = cells[2].textContent;
+        document.getElementById('editAccountRole').value = cells[3].textContent.toLowerCase();
+        
+        // Set status based on the status badge
+        const statusBadge = cells[6].querySelector('.status-badge');
+        let status = 'active';
+        if (statusBadge.classList.contains('warning')) {
+            status = 'inactive';
+        } else if (statusBadge.classList.contains('danger')) {
+            status = 'locked';
+        }
+        document.getElementById('editAccountStatus').value = status;
+    }
+    
+    function updateAccountRow(accountId, name, email, role, status) {
+        // Find the row with the matching accountId
+        const row = document.querySelector(`button[data-account-id="${accountId}"]`).closest('tr');
+        const cells = row.querySelectorAll('td');
+        
+        // Update the row with new data
+        cells[1].textContent = name;
+        cells[2].textContent = email;
+        cells[3].textContent = role.charAt(0).toUpperCase() + role.slice(1); // Capitalize first letter
+        
+        // Update status badge
+        const statusBadge = cells[6].querySelector('.status-badge');
+        statusBadge.textContent = status.charAt(0).toUpperCase() + status.slice(1); // Capitalize first letter
+        
+        // Update status badge class
+        statusBadge.className = 'status-badge';
+        if (status === 'active') {
+            statusBadge.classList.add('success');
+        } else if (status === 'inactive') {
+            statusBadge.classList.add('warning');
+        } else if (status === 'locked') {
+            statusBadge.classList.add('danger');
+        }
+        
+        // Update action buttons based on status
+        const actionCell = cells[7];
+        if (status === 'active') {
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small danger deactivate-account-btn" data-account-id="${accountId}" data-lang-key="deactivate">Deactivate</button>
+            `;
+        } else if (status === 'inactive') {
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small success activate-account-btn" data-account-id="${accountId}" data-lang-key="activate">Activate</button>
+            `;
+        } else if (status === 'locked') {
+            actionCell.innerHTML = `
+                <button class="action-btn small edit-account-btn" data-account-id="${accountId}" data-lang-key="edit">Edit</button>
+                <button class="action-btn small success unlock-account-btn" data-account-id="${accountId}" data-lang-key="unlock">Unlock</button>
+            `;
+        }
+        
+        // Re-add event listeners to the new buttons
+        addAccountButtonListeners();
+    }
+</script> 
