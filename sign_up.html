@@ -12,6 +12,57 @@
     />
     <script src="language.js"></script>
     <style>
+      /* Language dropdown styles */
+      .language-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 15px;
+      }
+      
+      .language-toggle {
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-decoration: none;
+        padding: 5px;
+      }
+      
+      .language-toggle .fas {
+        margin-right: 5px;
+      }
+      
+      .language-options {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      
+      .language-dropdown:hover .language-options {
+        display: block;
+      }
+      
+      .language-option {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.2s;
+      }
+      
+      .language-option:hover {
+        background-color: #f1f1f1;
+      }
+      
+      .language-option.active {
+        background-color: #e6f7ff;
+        font-weight: bold;
+      }
+      
       /* Sign Up page specific styles */
       .signup-container {
         display: flex;
@@ -136,16 +187,27 @@
     <!-- Simple Header -->
     <div class="header-signup">
       <div class="logo">
-        <a href="index.html"
-          ><img src="images/maxlida.png" alt="MAXLIDA Logo"
-        /></a>
+        <a href="index.html"><img src="images/maxlida.png" alt="MAXLIDA Logo" /></a>
         <span data-lang-key="shop_name">MAXLIDA Stationery</span>
       </div>
       <div class="top-nav-right">
-        <a href="login.html" data-lang-key="login">Login</a>
+        <!-- Language Dropdown -->
+        <div class="language-dropdown">
+          <a href="#" class="language-toggle">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">English</span>
+          </a>
+          <div class="language-options">
+            <a href="#" class="language-option" data-lang="english">English</a>
+            <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+          </div>
+        </div>
+        <!-- Auth links -->
+        <span id="nav-auth">
+          <a href="login.html" id="login-link" data-lang-key="login">Log In</a>
+        </span>
       </div>
     </div>
-
     <!-- Sign Up Container -->
     <div class="signup-container">
       <!-- Left Side - Branding -->
@@ -195,6 +257,75 @@
     <!-- Footer -->
     <footer>
       <div class="container" style="text-align: center">
+        <div
+          class="footer-content"
+          style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+          "
+        >
+          <div class="footer-section">
+            <h3 data-lang-key="customer_service">Customer Service</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+              <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+              <li>
+                <a href="#" data-lang-key="shipping_delivery"
+                  >Shipping & Delivery</a
+                >
+              </li>
+              <li>
+                <a href="#" data-lang-key="return_refund">Return & Refund</a>
+              </li>
+              <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="about_us">About Us</a></li>
+              <li>
+                <a href="#" data-lang-key="privacy_policy">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#" data-lang-key="terms_conditions"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li><a href="#" data-lang-key="careers">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="payment">Payment</h3>
+            <div class="payment-icons" style="text-align: center">
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-mastercard"></i>
+              <i class="fab fa-cc-paypal"></i>
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="follow_us">Follow Us</h3>
+            <div class="social-icons" style="text-align: center">
+              <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
         <div class="footer-bottom" style="text-align: center; margin-top: 20px">
           <p>
             &copy; 2025 MAXLIDA Stationery Shop.

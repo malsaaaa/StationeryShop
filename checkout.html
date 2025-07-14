@@ -395,10 +395,6 @@
                     <p data-lang-key="credit_debit_card">Credit/Debit Card</p>
                 </div>
                 <div class="payment-method">
-                    <img src="images/cod.png" alt="Cash on Delivery">
-                    <p data-lang-key="cash_on_delivery">Cash on Delivery</p>
-                </div>
-                <div class="payment-method">
                     <img src="images/tng.png" alt="E-Wallet">
                     <p data-lang-key="ewallet">TNG E-Wallet</p>
                 </div>
@@ -585,7 +581,7 @@ const deliveryRadio = document.getElementById('delivery');
             
             applyVoucherBtn.addEventListener('click', function() {
                 const voucherCode = voucherInput.value.trim().toUpperCase();
-                if (voucherCode === 'WELCOME10' || voucherCode === 'MAXLIDA10') {
+                if (voucherCode === 'MAXLIDA10') {
                     voucherApplied.style.display = 'block';
                     voucherInput.value = '';
                     updateTotal();

@@ -88,280 +88,242 @@
 
     <!-- Breadcrumb -->
     <div class="breadcrumb-container">
-      <div class="container">
-        <ul class="breadcrumb">
-          <li><a href="index.html" data-lang-key="home">Home</a></li>
-          <li>
-            <a href="#" data-lang-key="office_supplies"
-              >Office & School Supplies</a
-            >
-          </li>
-          <li><a href="#" data-lang-key="notebooks">Notebooks</a></li>
-          <li class="active" data-lang-key="premium_hardcover_notebook">
-            Premium Leather Journal Notebook, Lined Paper, A5 Size
-          </li>
-        </ul>
-      </div>
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="index.html" data-lang-key="home">Home</a></li>
+                <li><a href="#" data-lang-key="office_supplies">Office & School Supplies</a></li>
+                <li><a href="#" data-lang-key="notebooks">Notebooks</a></li>
+                <li class="active" data-lang-key="premium_hardcover_notebook">Premium Leather Journal Notebook, Lined Paper, A5 Size</li>
+            </ul>
+        </div>
     </div>
 
     <!-- Product Detail Section -->
     <section class="product-detail">
-      <div class="container">
-        <div class="product-detail-container">
-          <div class="product-gallery">
-            <div class="main-image">
-              <img
-                src="images/premium_notebook1.png"
-                alt="Premium Notebook"
-                id="main-product-image"
-              />
-            </div>
-            <div class="thumbnail-images">
-              <div
-                class="thumbnail active"
-                onclick="changeImage('images/premium_notebook1.png')"
-              >
-                <img
-                  src="images/premium_notebook1.png"
-                  alt="Premium Notebook Thumbnail 1"
-                />
-              </div>
-              <div
-                class="thumbnail"
-                onclick="changeImage('images/premium_notebook2.png')"
-              >
-                <img
-                  src="images/premium_notebook2.png"
-                  alt="Premium Notebook Thumbnail 2"
-                />
-              </div>
-              <div
-                class="thumbnail"
-                onclick="changeImage('images/premium_notebook3.png')"
-              >
-                <img
-                  src="images/premium_notebook3.png"
-                  alt="Premium Notebook Thumbnail 3"
-                />
-              </div>
-              <div
-                class="thumbnail"
-                onclick="changeImage('images/premium_notebook4.png')"
-              >
-                <img
-                  src="images/premium_notebook4.png"
-                  alt="Premium Notebook Thumbnail 4"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="product-info-detail">
-            <h1
-              class="product-title"
-              data-lang-key="premium_hardcover_notebook_full"
-            >
-              Premium Leather Journal Notebook, Lined Paper, A5 Size, Suitable
-              For Work, Note-Taking, Business, Travel, Daily Journaling, 200
-              Pages
-            </h1>
-
-            <div class="product-rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-              <span class="rating-count" data-lang-key="reviews_count"
-                >(100+ Reviews)</span
-              >
-            </div>
-
-            <div class="product-price-detail">
-              <span class="current-price-large">RM27.00</span>
-              <span class="original-price-large">RM45.00</span>
-              <span class="discount-percent">40% OFF</span>
-            </div>
-
-            <div class="product-options">
-              <h3 data-lang-key="size">Size</h3>
-              <div class="option-buttons">
-                <button class="option-btn active" data-lang-key="a5_black">
-                  A5 Black
-                </button>
-                <button class="option-btn" data-lang-key="a5_brown">
-                  A5 Brown
-                </button>
-              </div>
-            </div>
-
-            <div class="quantity-selector">
-              <h3 data-lang-key="quantity">Qty:</h3>
-              <div class="quantity-controls">
-                <button class="qty-btn" onclick="decreaseQuantity()">-</button>
-                <input type="text" id="quantity" value="1" readonly />
-                <button class="qty-btn" onclick="increaseQuantity()">+</button>
-              </div>
-            </div>
-
-            <div class="product-actions">
-              <button class="add-to-cart-btn" data-lang-key="add_to_cart">
-                ADD TO CART
-              </button>
-            </div>
-
-            <div class="shipping-info">
-              <h3 data-lang-key="shipping_to_malaysia">Shipping to Malaysia</h3>
-              <div class="shipping-detail">
-                <i class="fas fa-truck"></i>
-                <div>
-                  <p data-lang-key="free_shipping_info">
-                    Free standard shipping on orders over RM80.00
-                  </p>
-                  <p data-lang-key="delivery_estimate">
-                    Estimated to be delivered on 17/07/2025-22/07/2025
-                  </p>
+        <div class="container">
+            <div class="product-detail-container">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="images/premium_notebook1.png" alt="Premium Notebook" id="main-product-image">
+                    </div>
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active" onclick="changeImage('images/premium_notebook1.png')">
+                            <img src="images/premium_notebook1.png" alt="Premium Notebook Thumbnail 1">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('images/premium_notebook2.png')">
+                            <img src="images/premium_notebook2.png" alt="Premium Notebook Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('images/premium_notebook3.png')">
+                            <img src="images/premium_notebook3.png" alt="Premium Notebook Thumbnail 3">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('images/premium_notebook4.png')">
+                            <img src="images/premium_notebook4.png" alt="Premium Notebook Thumbnail 4">
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="product-info-detail">
+                    <h1 class="product-title" data-lang-key="premium_hardcover_notebook_full">Premium Leather Journal Notebook, Lined Paper, A5 Size, Suitable For Work, Note-Taking, Business, Travel, Daily Journaling, 200 Pages</h1>
+                    
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-count" data-lang-key="reviews_count">(100+ Reviews)</span>
+                    </div>
+                    
+                    <div class="product-price-detail">
+                        <span class="current-price-large">RM27.00</span>
+                        <span class="original-price-large">RM45.00</span>
+                        <span class="discount-percent">40% OFF</span>
+                    </div>
+                    
+                    <div class="product-options">
+                        <h3 data-lang-key="size">Size</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-lang-key="a5_black">A5 Black</button>
+                            <button class="option-btn" data-lang-key="a5_brown">A5 Brown</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <h3 data-lang-key="quantity">Qty:</h3>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="decreaseQuantity()">-</button>
+                            <input type="text" id="quantity" value="1" readonly>
+                            <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn" data-lang-key="add_to_cart">ADD TO CART</button>
+                    </div>
+                    
+                    <div class="shipping-info">
+                        <h3 data-lang-key="shipping_to_malaysia">Shipping to Malaysia</h3>
+                        <div class="shipping-detail">
+                            <i class="fas fa-truck"></i>
+                            <div>
+                                <p data-lang-key="free_shipping_info">Free standard shipping on orders over RM80.00</p>
+                                <p data-lang-key="delivery_estimate">Estimated to be delivered on 17/07/2025-22/07/2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="store-policies">
+                        <div class="policy">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4 data-lang-key="cod_policy">COD Policy</h4>
+                                <a href="#" data-lang-key="learn_more">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="policy">
+                            <i class="fas fa-undo"></i>
+                            <div>
+                                <h4 data-lang-key="return_policy">Return Policy</h4>
+                                <a href="#" data-lang-key="return_policy_link">Return Policy</a>
+                            </div>
+                        </div>
+                        <div class="policy">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <h4 data-lang-key="shipping_security">Shipping Security</h4>
+                                <div class="security-badges">
+                                    <span data-lang-key="safe_payments">Safe Payments</span>
+                                    <span data-lang-key="secure_logistics">Secure Logistics</span>
+                                    <span data-lang-key="customer_service_badge">Customer Service</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="store-policies">
-              <div class="policy">
-                <i class="fas fa-shield-alt"></i>
-                <div>
-                  <h4 data-lang-key="cod_policy">COD Policy</h4>
-                  <a href="#" data-lang-key="learn_more">Learn More</a>
+            
+            <div class="product-description">
+                <h2 data-lang-key="description">Description</h2>
+                <div class="description-content">
+                    <p data-lang-key="product_description_text">This premium leather journal notebook features high-quality lined paper that's perfect for writing, note-taking, and journaling. The hardcover design provides durability while the elegant appearance makes it suitable for professional settings.</p>
+                    <ul>
+                        <li data-lang-key="product_material">Material: Premium PU leather cover with acid-free paper</li>
+                        <li data-lang-key="product_size">Size: A5 (148 x 210 mm)</li>
+                        <li data-lang-key="product_pages">Pages: 200 pages (100 sheets)</li>
+                        <li data-lang-key="product_paper_weight">Paper weight: 100 GSM</li>
+                        <li data-lang-key="product_features">Features: Elastic closure band, bookmark ribbon, inner pocket</li>
+                        <li data-lang-key="product_suitable_for">Suitable for: Work notes, journaling, planning, sketching</li>
+                    </ul>
                 </div>
-              </div>
-              <div class="policy">
-                <i class="fas fa-undo"></i>
-                <div>
-                  <h4 data-lang-key="return_policy">Return Policy</h4>
-                  <a href="#" data-lang-key="return_policy_link"
-                    >Return Policy</a
-                  >
-                </div>
-              </div>
-              <div class="policy">
-                <i class="fas fa-lock"></i>
-                <div>
-                  <h4 data-lang-key="shipping_security">Shipping Security</h4>
-                  <div class="security-badges">
-                    <span data-lang-key="safe_payments">Safe Payments</span>
-                    <span data-lang-key="secure_logistics"
-                      >Secure Logistics</span
-                    >
-                    <span data-lang-key="customer_service_badge"
-                      >Customer Service</span
-                    >
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
+            
+            <div class="customer-reviews">
+                <div class="reviews-header">
+                    <h2 data-lang-key="customer_reviews">Customer Reviews (100+)</h2>
+                    <a href="#" data-lang-key="view_all_reviews">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+                
+                <div class="review-item">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">Asfa Danish</span>
+                        <span class="review-date">15 Apr 2025</span>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-details">
+                        <p>Color: Brown | Size: A5</p>
+                    </div>
+                    <div class="review-content">
+                        <p>I love it. The front and back is so smooth. I used it right away!</p>
+                    </div>
+                    <div class="review-images">
+                        <img src="images/review1.png" alt="Customer Review Image">
+                    </div>
+                    <div class="review-helpful">
+                        <button><i class="far fa-thumbs-up"></i> <span data-lang-key="helpful">Helpful</span> (5)</button>
+                    </div>
+                </div>
+                
+                <div class="review-item">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">Danial Hakim</span>
+                        <span class="review-date">10 Apr 2025</span>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-details">
+                        <p>Color: Black | Size: A5</p>
+                    </div>
+                    <div class="review-content">
+                        <p>Exactly what I wanted! The quality is excellent and the paper is thick enough that ink doesn't bleed through.</p>
+                    </div>
+                    <div class="review-helpful">
+                        <button><i class="far fa-thumbs-up"></i> <span data-lang-key="helpful">Helpful</span> (3)</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="related-products">
+                <h2 data-lang-key="you_may_also_like">You May Also Like</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/gel_pens.png" alt="Gel Pen Set">
+                            <div class="discount-tag">30% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 data-lang-key="colorful_gel_pens">10-Pack Colorful Gel Pens</h3>
+                            <div class="price">
+                                <span class="current-price">RM12.50</span>
+                                <span class="original-price">RM17.90</span>
+                            </div>
+                            <div class="sold">89 sold</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/desk_organizer.jpg" alt="Desk Organizer">
+                            <div class="discount-tag">25% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 data-lang-key="wooden_desk_organizer">Wooden Desk Organizer</h3>
+                            <div class="price">
+                                <span class="current-price">RM37.50</span>
+                                <span class="original-price">RM49.90</span>
+                            </div>
+                            <div class="sold">75 sold</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/watercolor_set.jpg" alt="Watercolor Set">
+                            <div class="discount-tag">20% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 data-lang-key="professional_watercolor_set">Professional Watercolor Set</h3>
+                            <div class="price">
+                                <span class="current-price">RM42.90</span>
+                                <span class="original-price">RM53.90</span>
+                            </div>
+                            <div class="sold">47 sold</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="product-description">
-          <h2 data-lang-key="description">Description</h2>
-          <div class="description-content">
-            <p data-lang-key="product_description_text">
-              This premium leather journal notebook features high-quality lined
-              paper that's perfect for writing, note-taking, and journaling. The
-              hardcover design provides durability while the elegant appearance
-              makes it suitable for professional settings.
-            </p>
-            <ul>
-              <li data-lang-key="product_material">
-                Material: Premium PU leather cover with acid-free paper
-              </li>
-              <li data-lang-key="product_size">Size: A5 (148 x 210 mm)</li>
-              <li data-lang-key="product_pages">
-                Pages: 200 pages (100 sheets)
-              </li>
-              <li data-lang-key="product_paper_weight">
-                Paper weight: 100 GSM
-              </li>
-              <li data-lang-key="product_features">
-                Features: Elastic closure band, bookmark ribbon, inner pocket
-              </li>
-              <li data-lang-key="product_suitable_for">
-                Suitable for: Work notes, journaling, planning, sketching
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="customer-reviews">
-          <div class="reviews-header">
-            <h2 data-lang-key="customer_reviews">Customer Reviews (100+)</h2>
-            <a href="#" data-lang-key="view_all_reviews"
-              >View All <i class="fas fa-chevron-right"></i
-            ></a>
-          </div>
-
-          <div class="review-item">
-            <div class="reviewer-info">
-              <span class="reviewer-name">Asfa Danish</span>
-              <span class="review-date">15 Apr 2025</span>
-            </div>
-            <div class="review-stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="review-details">
-              <p>Color: Brown | Size: A5</p>
-            </div>
-            <div class="review-content">
-              <p>
-                I love it. The front and back is so smooth. I used it right
-                away!
-              </p>
-            </div>
-            <div class="review-images">
-              <img src="images/review1.png" alt="Customer Review Image" />
-            </div>
-            <div class="review-helpful">
-              <button>
-                <i class="far fa-thumbs-up"></i>
-                <span data-lang-key="helpful">Helpful</span> (5)
-              </button>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="reviewer-info">
-              <span class="reviewer-name">Danial Hakim</span>
-              <span class="review-date">10 Apr 2025</span>
-            </div>
-            <div class="review-stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="review-details">
-              <p>Color: Black | Size: A5</p>
-            </div>
-            <div class="review-content">
-              <p>
-                Exactly what I wanted! The quality is excellent and the paper is
-                thick enough that ink doesn't bleed through.
-              </p>
-            </div>
-            <div class="review-helpful">
-              <button>
-                <i class="far fa-thumbs-up"></i>
-                <span data-lang-key="helpful">Helpful</span> (3)
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->

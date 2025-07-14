@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="orders_page_title">My Orders</title>
+    <link rel="icon" href="/images/maxlida.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="language.js"></script>
+    <style>
+        /* Orders page specific styles */
+        .orders-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        
+        .orders-header {
+            margin-bottom: 20px;
+        }
+        
+        .orders-header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .orders-table th, .orders-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .orders-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .orders-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .order-actions {
+            white-space: nowrap;
+        }
+        
+        .order-actions a {
+            color: #1a73e8;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 15px;
+            display: inline-block;
+        }
+        
+        .order-actions a:hover {
+            text-decoration: underline;
+        }
+        
+        .order-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .status-processing {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .status-shipped {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .status-delivered {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-cancelled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .no-orders {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .no-orders i {
+            font-size: 48px;
+            color: #9e9e9e;
+            margin-bottom: 15px;
+        }
+        
+        .no-orders h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .no-orders p {
+            color: #757575;
+            margin-bottom: 20px;
+        }
+        
+        .no-orders .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <div class="container">
+            <div class="top-nav-left">
+            <a href="index.html" data-lang-key="home">Home</a>
+            <span class="divider">|</span>
+            <h4 data-lang-key="follow_us">Follow us on</h4> 
+            <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                class="social-icon"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+            ></a>
+            <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                class="social-icon"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+            ></a>
+            </div>
+            <div class="top-nav-right">
+            <div class="language-dropdown">
+                <a href="#" class="language-toggle">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-lang">English</span>
+                </a>
+                <div class="language-options">
+                    <a href="#" class="language-option" data-lang="english">English</a>
+                    <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+                </div>
+            </div>
+            </div>
+            <span id="nav-auth">
+                <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
+                <span class="divider">|</span>
+                <a href="login.html" data-lang-key="login">Login</a>
+            </span>
+            <span id="nav-profile" style="display: none">
+                <i class="fas fa-user" style="margin-right: 5px"></i>
+                <span id="profile-username"></span>
+                <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935;" data-lang-key="logout">Logout</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/maxlida.png" alt="MAXLIDA Stationery Shop" class="logo-image">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products..." data-lang-key="search_placeholder" data-lang-attr="placeholder">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-actions">
+                <a href="cart.html" class="action-link cart-link"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html" data-lang-key="home">Home</a>
+            <span class="separator">/</span>
+            <span class="current" data-lang-key="my_orders">My Orders</span>
+        </div>
+    </div>
+
+    <!-- Orders Container -->
+    <div class="orders-container">
+        <div class="orders-header">
+            <h1 data-lang-key="my_orders">My Orders</h1>
+        </div>
+        
+        <!-- Orders Table -->
+        <table class="orders-table" id="orders-table">
+            <thead>
+                <tr>
+                    <th data-lang-key="order_id">Order ID</th>
+                    <th data-lang-key="order_date">Order Date</th>
+                    <th data-lang-key="total">Total</th>
+                    <th data-lang-key="status">Status</th>
+                    <th data-lang-key="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orders-list">
+                <!-- Orders will be dynamically populated here -->
+            </tbody>
+        </table>
+        
+        <!-- No Orders Message (initially hidden) -->
+        <div class="no-orders" id="no-orders" style="display: none;">
+            <i class="fas fa-box-open"></i>
+            <h2 data-lang-key="no_orders_yet">No Orders Yet</h2>
+            <p data-lang-key="no_orders_message">You haven't placed any orders yet. Start shopping to place your first order!</p>
+            <a href="index.html" class="btn" data-lang-key="start_shopping">Start Shopping</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center">
+            <div
+            class="footer-content"
+            style="
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 30px;
+            "
+            >
+            <div class="footer-section">
+                <h3 data-lang-key="customer_service">Customer Service</h3>
+                <ul
+                style="padding-left: 0; list-style-type: none; text-align: center"
+                >
+                <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+                <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+                <li>
+                    <a href="#" data-lang-key="shipping_delivery"
+                    >Shipping & Delivery</a
+                    >
+                </li>
+                <li>
+                    <a href="#" data-lang-key="return_refund">Return & Refund</a>
+                </li>
+                <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+                <ul
+                style="padding-left: 0; list-style-type: none; text-align: center"
+                >
+                <li><a href="#" data-lang-key="about_us">About Us</a></li>
+                <li>
+                    <a href="#" data-lang-key="privacy_policy">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" data-lang-key="terms_conditions"
+                    >Terms & Conditions</a
+                    >
+                </li>
+                <li><a href="#" data-lang-key="careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-lang-key="payment">Payment</h3>
+                <div class="payment-icons" style="text-align: center">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-lang-key="follow_us">Follow Us</h3>
+                <div class="social-icons" style="text-align: center">
+                <a
+                    href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                    target="_blank"
+                    ><i class="fab fa-facebook"></i
+                ></a>
+                <a
+                    href="https://www.instagram.com/maxlidaent/?hl=en"
+                    target="_blank"
+                    ><i class="fab fa-instagram"></i
+                ></a>
+                </div>
+            </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 20px">
+            <p>
+                &copy; 2025 MAXLIDA Stationery Shop.
+                <span data-lang-key="all_rights_reserved">All Rights Reserved</span
+                >.
+            </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Orders Script with Hard-coded Data -->
+    <script>
+        // Hard-coded user data
+        const hardCodedUser = {
+            username: 'syed',
+            name: 'Syed'
+        };
+        
+        // Hard-coded orders data
+        const hardCodedOrders = [
+            {
+                id: 'ORD-12345',
+                username: 'syed',
+                date: '2025-07-14T10:30:00',
+                status: 'Processing',
+                total: 75.90,
+                shipping: 10.00,
+                discount: 5.00,
+                paymentMethod: 'Credit Card',
+                shippingAddress: 'Jalan 14, Taman Lian Keping, Petaling Jaya, 77300, Malaysia',
+                contactInfo: '+60 12-345-6789',
+                items: [
+                    {
+                        id: 'P001',
+                        name: 'Premium Notebook',
+                        price: 15.90,
+                        quantity: 2,
+                        image: 'images/products/notebook.jpg'
+                    },
+                    {
+                        id: 'P002',
+                        name: 'Gel Pen Set',
+                        price: 12.50,
+                        quantity: 1,
+                        image: 'images/products/pens.jpg'
+                    },
+                    {
+                        id: 'P003',
+                        name: 'Desk Organizer',
+                        price: 25.60,
+                        quantity: 1,
+                        image: 'images/products/organizer.jpg'
+                    }
+                ],
+                deliveryUpdates: [
+                    {
+                        date: '2025-07-14T10:30:00',
+                        status: 'Order Placed',
+                        description: 'Your order has been placed successfully.'
+                    },
+                    {
+                        date: '2025-07-14T11:45:00',
+                        status: 'Processing',
+                        description: 'Your order is being processed.'
+                    }
+                ]
+            },
+            {
+                id: 'ORD-67890',
+                username: 'syed',
+                date: '2025-07-12T14:20:00',
+                status: 'Shipped',
+                total: 42.80,
+                shipping: 10.00,
+                discount: 0.00,
+                paymentMethod: 'Online Banking',
+                shippingAddress: 'Jalan 14, Taman Lian Keping, Petaling Jaya, 77300, Malaysia',
+                contactInfo: '+60 12-345-6789',
+                trackingNumber: 'TRK4567890',
+                items: [
+                    {
+                        id: 'P004',
+                        name: 'Sketchbook',
+                        price: 18.90,
+                        quantity: 1,
+                        image: 'images/products/sketchbook.jpg'
+                    },
+                    {
+                        id: 'P005',
+                        name: 'Colored Pencils',
+                        price: 23.90,
+                        quantity: 1,
+                        image: 'images/products/pencils.jpg'
+                    }
+                ],
+                deliveryUpdates: [
+                    {
+                        date: '2025-07-12T14:20:00',
+                        status: 'Order Placed',
+                        description: 'Your order has been placed successfully.'
+                    },
+                    {
+                        date: '2025-07-13T09:15:00',
+                        status: 'Processing',
+                        description: 'Your order is being processed.'
+                    },
+                    {
+                        date: '2025-07-14T16:30:00',
+                        status: 'Shipped',
+                        description: 'Your order has been shipped. Tracking information has been updated.'
+                    }
+                ]
+            },
+            {
+                id: 'ORD-24680',
+                username: 'syed',
+                date: '2025-07-08T09:45:00',
+                status: 'Delivered',
+                total: 105.70,
+                shipping: 10.00,
+                discount: 15.00,
+                paymentMethod: 'Credit Card',
+                shippingAddress: 'Jalan 14, Taman Lian Keping, Petaling Jaya, 77300, Malaysia',
+                contactInfo: '+60 12-345-6789',
+                trackingNumber: 'TRK7654321',
+                items: [
+                    {
+                        id: 'P006',
+                        name: 'Office Chair',
+                        price: 89.90,
+                        quantity: 1,
+                        image: 'images/products/chair.jpg'
+                    },
+                    {
+                        id: 'P007',
+                        name: 'Desk Lamp',
+                        price: 30.80,
+                        quantity: 1,
+                        image: 'images/products/lamp.jpg'
+                    }
+                ],
+                deliveryUpdates: [
+                    {
+                        date: '2025-07-08T09:45:00',
+                        status: 'Order Placed',
+                        description: 'Your order has been placed successfully.'
+                    },
+                    {
+                        date: '2025-07-09T11:20:00',
+                        status: 'Processing',
+                        description: 'Your order is being processed.'
+                    },
+                    {
+                        date: '2025-07-10T14:30:00',
+                        status: 'Shipped',
+                        description: 'Your order has been shipped. Tracking information has been updated.'
+                    },
+                    {
+                        date: '2025-07-13T10:15:00',
+                        status: 'Delivered',
+                        description: 'Your order has been delivered.'
+                    }
+                ]
+            }
+        ];
+        
+        // Check login status and update UI accordingly
+        function checkLoginStatus() {
+            // Using hard-coded user instead of localStorage
+            const user = hardCodedUser;
+            const navAuth = document.getElementById('nav-auth');
+            const navProfile = document.getElementById('nav-profile');
+            const profileUsername = document.getElementById('profile-username');
+            
+            // Always show as logged in with hard-coded user
+            navAuth.style.display = 'none';
+            navProfile.style.display = 'inline-block';
+            profileUsername.textContent = user.username;
+            
+            // Load orders for the hard-coded user
+            loadUserOrders(user.username);
+        }
+        
+        // Handle logout (redirects to index but doesn't actually log out in this hard-coded version)
+        document.getElementById('logout-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+        
+        // Load user orders from hard-coded data
+        function loadUserOrders(username) {
+            // Use hard-coded orders instead of localStorage
+            const userOrders = hardCodedOrders.filter(order => order.username === username);
+            
+            const ordersTable = document.getElementById('orders-table');
+            const ordersList = document.getElementById('orders-list');
+            const noOrdersMessage = document.getElementById('no-orders');
+            
+            // Clear existing orders
+            ordersList.innerHTML = '';
+            
+            if (userOrders.length > 0) {
+                // Show orders table and hide no orders message
+                ordersTable.style.display = 'table';
+                noOrdersMessage.style.display = 'none';
+                
+                // Sort orders by date (newest first)
+                userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Populate orders
+                userOrders.forEach(order => {
+                    const row = document.createElement('tr');
+                    
+                    // Get status class
+                    const statusClass = getStatusClass(order.status);
+                    
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${formatDate(order.date)}</td>
+                        <td>RM ${order.total.toFixed(2)}</td>
+                        <td><span class="order-status ${statusClass}" data-lang-key="${order.status.toLowerCase()}">${order.status}</span></td>
+                        <td class="order-actions">
+                            <a href="order-detail.html?id=${order.id}" data-lang-key="view_details">View Details</a>
+                            ${order.status === 'Processing' ? 
+                                `<a href="#" class="cancel-order" data-order-id="${order.id}" data-lang-key="cancel_order">Cancel Order</a>` : ''}
+                        </td>
+                    `;
+                    
+                    ordersList.appendChild(row);
+                });
+                
+                // Add event listeners to cancel buttons
+                document.querySelectorAll('.cancel-order').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const orderId = this.getAttribute('data-order-id');
+                        cancelOrder(orderId);
+                    });
+                });
+            } else {
+                // Hide orders table and show no orders message
+                ordersTable.style.display = 'none';
+                noOrdersMessage.style.display = 'block';
+            }
+        }
+        
+        // Format date to a readable format
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        // Get status class for styling
+        function getStatusClass(status) {
+            switch(status) {
+                case 'Processing': return 'status-processing';
+                case 'Shipped': return 'status-shipped';
+                case 'Delivered': return 'status-delivered';
+                case 'Cancelled': return 'status-cancelled';
+                default: return '';
+            }
+        }
+        
+        // Cancel an order (updates UI only in this hard-coded version)
+        function cancelOrder(orderId) {
+            // Find the order in the hard-coded data
+            const orderIndex = hardCodedOrders.findIndex(order => order.id === orderId);
+            
+            if (orderIndex !== -1) {
+                // Update order status in the hard-coded data (this will only persist during the current session)
+                hardCodedOrders[orderIndex].status = 'Cancelled';
+                
+                // Add cancellation to delivery updates
+                hardCodedOrders[orderIndex].deliveryUpdates.push({
+                    date: new Date().toISOString(),
+                    status: 'Cancelled',
+                    description: 'Order has been cancelled by customer.'
+                });
+                
+                // Reload orders to update the UI
+                loadUserOrders(hardCodedUser.username);
+                
+                // Show success message
+                alert('Order cancelled successfully');
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>

@@ -146,6 +146,9 @@ const translations = {
         "order_list": "Order List",
         "order_id": "Order ID",
         "customer": "Customer",
+        "view_details": "View Details",
+        "cancel_order": "Cancel Order",
+        "my_orders": "My Orders",
         "date": "Date",
         "amount": "Amount",
         "process": "Process",
@@ -305,6 +308,9 @@ const translations = {
         
         // Featured, Popular, New Items
         "featured_items": "Featured Items",
+        
+        // Discount Tags
+        "discount_percent": "{percent}% OFF",
         "popular_items": "Popular Items",
         "new_arrivals": "New Arrivals",
         
@@ -545,6 +551,9 @@ const translations = {
         "order_list": "Senarai Pesanan",
         "order_id": "ID Pesanan",
         "customer": "Pelanggan",
+        "view_details": "Lihat Butiran",
+        "cancel_order": "Batalkan Pesanan",
+        "my_orders": "Pesanan Saya",
         "date": "Tarikh",
         "amount": "Jumlah",
         "process": "Proses",
@@ -785,6 +794,9 @@ const translations = {
         
         // Featured, Popular, New Items
         "featured_items": "Produk Pilihan",
+        
+        // Discount Tags
+        "discount_percent": "{percent}% DISKAUN",
         "popular_items": "Produk Popular",
         "new_arrivals": "Produk Baharu",
         
@@ -887,13 +899,28 @@ function updateContent() {
         const key = element.getAttribute('data-lang-key');
         
         if (translations[currentLanguage][key]) {
+            let text = translations[currentLanguage][key];
+            
+            // Check if element has parameters to substitute
+            if (element.hasAttribute('data-lang-params')) {
+                try {
+                    const params = JSON.parse(element.getAttribute('data-lang-params'));
+                    // Replace each parameter in the text
+                    for (const [paramKey, paramValue] of Object.entries(params)) {
+                        text = text.replace(`{${paramKey}}`, paramValue);
+                    }
+                } catch (e) {
+                    console.error('Error parsing data-lang-params:', e);
+                }
+            }
+            
             // Special handling for input placeholders
             if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
-                element.placeholder = translations[currentLanguage][key];
+                element.placeholder = text;
             } 
             // For everything else, update the text content
             else {
-                element.textContent = translations[currentLanguage][key];
+                element.textContent = text;
             }
         }
     });

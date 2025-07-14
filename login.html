@@ -161,21 +161,21 @@
       </div>
       <!-- Auth links -->
       <div class="top-nav-right">
+        <!-- Language Dropdown -->
+        <div class="language-dropdown">
+          <a href="#" class="language-toggle">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">English</span>
+          </a>
+          <div class="language-options">
+            <a href="#" class="language-option" data-lang="english">English</a>
+            <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+          </div>
+        </div>
+        <!-- Auth links -->
         <span id="nav-auth">
-          <a href="sign_up.html" id="signup-link">Sign Up</a> |
-          <a href="login.html" id="login-link">Login</a>
+          <a href="sign_up.html" id="signup-link" data-lang-key="sign_up">Sign Up</a>
         </span>
-        <span id="nav-profile" style="display: none">
-          <i class="fas fa-user"></i>
-          <span id="profile-username"></span>
-          <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935"
-            >Logout</a
-          >
-        </span>
-      </div>
-      <!-- Profile link (hidden by default) -->
-      <div class="top-nav-right" id="nav-profile">
-        <a href="#" id="profile-link">Profile</a>
       </div>
     </div>
 

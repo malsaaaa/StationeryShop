@@ -351,14 +351,14 @@
             </div>
           </div>
 
-          <!-- Recent Orders (DYNAMIC) -->
+          <!-- Recent Orders -->
           <div class="card">
             <div class="card-header">
               <h3>Recent Orders</h3>
               <a href="#" class="view-all">View All</a>
             </div>
             <div class="card-body">
-              <table class="data-table dynamic-orders-table">
+              <table class="data-table">
                 <thead>
                   <tr>
                     <th>Order ID</th>
@@ -369,8 +369,55 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody id="recent-orders-tbody">
-                  <!-- Orders will be loaded here -->
+                <tbody>
+                  <tr>
+                    <td>#ORD-2025-1001</td>
+                    <td>Thomas Shelby</td>
+                    <td>14 Jul 2025</td>
+                    <td>RM 32.84</td>
+                    <td>
+                      <span class="status-badge pending">Processing</span>
+                    </td>
+                    <td><a href="#" class="action-btn">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-1000</td>
+                    <td>Sarah Johnson</td>
+                    <td>13 Jul 2025</td>
+                    <td>RM 78.50</td>
+                    <td>
+                      <span class="status-badge completed">Delivered</span>
+                    </td>
+                    <td><a href="#" class="action-btn">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-0999</td>
+                    <td>Michael Wong</td>
+                    <td>13 Jul 2025</td>
+                    <td>RM 125.75</td>
+                    <td><span class="status-badge shipping">Shipping</span></td>
+                    <td><a href="#" class="action-btn">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-0998</td>
+                    <td>Aisha Abdullah</td>
+                    <td>12 Jul 2025</td>
+                    <td>RM 45.20</td>
+                    <td>
+                      <span class="status-badge completed">Delivered</span>
+                    </td>
+                    <td><a href="#" class="action-btn">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-0997</td>
+                    <td>Raj Patel</td>
+                    <td>12 Jul 2025</td>
+                    <td>RM 67.30</td>
+                    <td>
+                      <span class="status-badge cancelled">Cancelled</span>
+                    </td>
+                    <td><a href="#" class="action-btn">View</a></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -657,14 +704,54 @@
             <div class="card-header">
               <h3 data-lang-key="order_list">Order List</h3>
             </div>
-          <div class="card-body">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th data-lang-key="order_id">Order ID</th>
-                  <th data-lang-key="customer">Customer</th>
-                  <th data-lang-key="date">Date</th>
-                  <th data-lang-key="amount">Amount</th>
+            <div class="card-body">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th data-lang-key="order_id">Order ID</th>
+                    <th data-lang-key="customer">Customer</th>
+                    <th data-lang-key="date">Date</th>
+                    <th data-lang-key="amount">Amount</th>
+                    <th data-lang-key="status">Status</th>
+                    <th data-lang-key="actions">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#ORD-2025-1001</td>
+                    <td>Sarah Johnson</td>
+                    <td>14 Jul 2025</td>
+                    <td>RM 235.80</td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                    <td>
+                      <button class="action-btn small" data-lang-key="process">
+                        Process
+                      </button>
+                      <button class="action-btn small" data-lang-key="view">
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-0998</td>
+                    <td>Michael Wong</td>
+                    <td>13 Jul 2025</td>
+                    <td>RM 112.50</td>
+                    <td>
+                      <span class="status-badge processing">Processing</span>
+                    </td>
+                    <td>
+                      <button class="action-btn small" data-lang-key="ship">
+                        Ship
+                      </button>
+                      <button class="action-btn small" data-lang-key="view">
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -1104,6 +1191,131 @@
               </form>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 data-lang-key="add_new_product">Add New Product</h2>
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="addProductForm">
+            <div class="form-group">
+              <label for="productName" data-lang-key="product_name"
+                >Product Name</label
+              >
+              <input type="text" id="productName" name="productName" required />
+            </div>
+            <div class="form-group">
+              <label for="productCategory" data-lang-key="category"
+                >Category</label
+              >
+              <select id="productCategory" name="productCategory" required>
+                <option value="" data-lang-key="select_category">
+                  Select Category
+                </option>
+                <option value="notebooks" data-lang-key="notebooks">
+                  Notebooks
+                </option>
+                <option value="pens" data-lang-key="pens">
+                  Pens & Markers
+                </option>
+                <option value="office" data-lang-key="office">
+                  Office Supplies
+                </option>
+                <option value="art" data-lang-key="art">Art Supplies</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="productPrice" data-lang-key="price"
+                  >Price (RM)</label
+                >
+                <input
+                  type="number"
+                  id="productPrice"
+                  name="productPrice"
+                  step="0.01"
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="productStock" data-lang-key="stock">Stock</label>
+                <input
+                  type="number"
+                  id="productStock"
+                  name="productStock"
+                  min="0"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="productDescription" data-lang-key="description"
+                >Description</label
+              >
+              <textarea
+                id="productDescription"
+                name="productDescription"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="productImage" data-lang-key="product_image"
+                >Product Image</label
+              >
+              <input
+                type="file"
+                id="productImage"
+                name="productImage"
+                accept="image/*"
+              />
+              <div id="imagePreview" class="image-preview"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="productStatus" data-lang-key="status">Status</label>
+                <select id="productStatus" name="productStatus">
+                  <option value="active" data-lang-key="active">Active</option>
+                  <option value="inactive" data-lang-key="inactive">
+                    Inactive
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="productFeatured" data-lang-key="featured"
+                  >Featured</label
+                >
+                <select id="productFeatured" name="productFeatured">
+                  <option value="no" data-lang-key="no">No</option>
+                  <option value="yes" data-lang-key="yes">Yes</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button
+                type="button"
+                class="action-btn"
+                id="cancelAddProduct"
+                data-lang-key="cancel"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="action-btn primary"
+                data-lang-key="save_product"
+              >
+                Save Product
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -1566,30 +1778,6 @@
           .addEventListener("click", function () {
             window.location.href = "admin_login.html";
           });
-
-        function loadRecentOrders() {
-          const orders = JSON.parse(localStorage.getItem("orders")) || [];
-          const tbody = document.getElementById("recent-orders-tbody");
-          tbody.innerHTML = "";
-          if (orders.length === 0) {
-            tbody.innerHTML =
-              '<tr><td colspan="6" style="text-align:center;color:#aaa;">No orders yet.</td></tr>';
-            return;
-          }
-          orders.slice(0, 10).forEach((order) => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                        <td>${order.orderId}</td>
-                        <td>${order.customer}</td>
-                        <td>${order.date}</td>
-                        <td>${order.amount}</td>
-                        <td><span class="status-badge pending">Processing</span></td>
-                        <td><a href="#" class="action-btn">View</a></td>
-                    `;
-            tbody.appendChild(tr);
-          });
-        }
-        loadRecentOrders();
 
         // Check if user has a saved language preference and apply it
         const savedLanguage = localStorage.getItem("preferredLanguage");
