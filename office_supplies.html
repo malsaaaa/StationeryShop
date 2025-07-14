@@ -1,912 +1,670 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Office Supplies</title>
-    <link rel="icon" href="/images/maxlida.png">
-    <link rel="stylesheet" href="styles.css?v=1.1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/maxlida.png" />
+    <link rel="stylesheet" href="styles.css?v=1.1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-        /* Category Page Specific Styles */
+      .category-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+      .filter-sidebar {
+        width: 250px;
+        padding-right: 20px;
+        border-right: 1px solid #e0e0e0;
+      }
+      .product-grid-container {
+        flex: 1;
+        padding-left: 20px;
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+        position: relative;
+      }
+      .filter-section {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+      }
+      .filter-section h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: 600;
+      }
+      .filter-options {
+        list-style: none;
+        padding: 0;
+      }
+      .filter-options li {
+        margin-bottom: 8px;
+      }
+      .filter-options label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .filter-options input[type="checkbox"] {
+        margin-right: 8px;
+      }
+      .price-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .price-range input {
+        width: 80px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .filter-button {
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 10px;
+        width: 100%;
+      }
+      .filter-button:hover {
+        background-color: #ff5252;
+      }
+      .clear-button {
+        background-color: #f5f5f5;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+      .clear-button:hover {
+        background-color: #e0e0e0;
+      }
+      .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .category-title-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .see-all-button {
+        display: inline-flex;
+        align-items: center;
+        color: #ff6b35;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        background-color: rgba(255, 107, 53, 0.1);
+        transition: all 0.3s ease;
+      }
+      .see-all-button i {
+        margin-left: 5px;
+        font-size: 12px;
+      }
+      .see-all-button:hover {
+        background-color: rgba(255, 107, 53, 0.2);
+      }
+      .category-title {
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .filter-toggle {
+        display: none;
+        align-items: center;
+        gap: 5px;
+        background-color: #f5f5f5;
+        padding: 8px 15px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+      .search-filter {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+      }
+      .search-filter h3 {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .search-filter h3 i {
+        color: #ff6b6b;
+      }
+      @media (max-width: 768px) {
         .category-container {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
+          flex-direction: column;
         }
-
         .filter-sidebar {
-            width: 250px;
-            padding-right: 20px;
-            border-right: 1px solid #e0e0e0;
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid #e0e0e0;
+          padding-right: 0;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          display: none;
         }
-
+        .filter-sidebar.active {
+          display: block;
+        }
         .product-grid-container {
-            flex: 1;
-            padding-left: 20px;
+          padding-left: 0;
         }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            position: relative;
-        }
-
-        .filter-section {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 15px;
-        }
-
-        .filter-section h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .filter-options {
-            list-style: none;
-            padding: 0;
-        }
-
-        .filter-options li {
-            margin-bottom: 8px;
-        }
-
-        .filter-options label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .filter-options input[type="checkbox"] {
-            margin-right: 8px;
-        }
-
-        .price-range {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .price-range input {
-            width: 80px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .filter-button {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .filter-button:hover {
-            background-color: #ff5252;
-        }
-
-        .clear-button {
-            background-color: #f5f5f5;
-            color: #333;
-            border: 1px solid #ddd;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            margin-top: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .clear-button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .category-title-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .see-all-button {
-            display: inline-flex;
-            align-items: center;
-            color: #FF6B35;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            background-color: rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .see-all-button i {
-            margin-left: 5px;
-            font-size: 12px;
-        }
-        
-        .see-all-button:hover {
-            background-color: rgba(255, 107, 53, 0.2);
-        }
-
-        .category-title {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .sort-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .sort-option {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            background-color: #f5f5f5;
-            margin-left: 5px;
-        }
-
-        .sort-option.active {
-            background-color: #FF6B35;
-            color: white;
-        }
-
         .filter-toggle {
-            display: none;
-            align-items: center;
-            gap: 5px;
-            background-color: #f5f5f5;
-            padding: 8px 15px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            cursor: pointer;
+          display: flex;
         }
-
-        .search-filter {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-        }
-
-        .search-filter h3 {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .search-filter h3 i {
-            color: #ff6b6b;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .category-container {
-                flex-direction: column;
-            }
-
-            .filter-sidebar {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid #e0e0e0;
-                padding-right: 0;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-                display: none;
-            }
-
-            .filter-sidebar.active {
-                display: block;
-            }
-
-            .product-grid-container {
-                padding-left: 0;
-            }
-
-            .filter-toggle {
-                display: flex;
-            }
-        }
-
-        /* Product Grid Styles */
-        .product-grid {
-            position: relative;
-        }
+      }
+      .product-grid {
+        position: relative;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Top Navigation Bar -->
     <div class="top-nav">
-        <div class="container">
-            <div class="top-nav-left">
-                <a href="index.html" data-lang-key="home">Home</a>
-                <span class="divider">|</span>
-                <h4 data-lang-key="follow_us">Follow us on</h4>
-                <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" class="social-icon" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/maxlidaent/?hl=en" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="top-nav-right">
-                <a href="help.html"><i class="far fa-question-circle"></i> <span data-lang-key="help">Help</span></a>
-                <div class="language-dropdown">
-                    <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
-                    <div class="language-options">
-                        <a href="#" class="language-option" data-lang="english">English</a>
-                        <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
-                    </div>
-                </div>
-                <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
-                <span class="divider">|</span>
-                <a href="login.html" data-lang-key="login">Login</a>
-            </div>
+      <div class="container">
+        <div class="top-nav-left">
+          <a href="index.html" data-lang-key="home">Home</a>
+          <span class="divider">|</span>
+          <h4 data-lang-key="follow_us">Follow us on</h4>
+          <a
+            href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+            class="social-icon"
+            target="_blank"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/maxlidaent/?hl=en"
+            class="social-icon"
+            target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
         </div>
+        <div class="top-nav-right">
+          <div class="language-dropdown">
+            <a href="#" class="language-toggle"
+              ><i class="fas fa-globe"></i>
+              <span class="current-lang">English</span></a
+            >
+            <div class="language-options">
+              <a href="#" class="language-option" data-lang="english"
+                >English</a
+              >
+              <a href="#" class="language-option" data-lang="malay"
+                >Bahasa Melayu</a
+              >
+            </div>
+          </div>
+          <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
+          <span class="divider">|</span>
+          <a href="login.html" data-lang-key="login">Login</a>
+        </div>
+      </div>
     </div>
 
     <!-- Main Header -->
     <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="images/maxlida.png" alt="MAXLIDA Stationery Shop" class="logo-image">
-                </a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products..." data-lang-key="search_placeholder">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="header-actions">
-                <a href="cart.html" class="action-link cart-link"><i class="fas fa-shopping-cart"></i></a>
-            </div>
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              src="images/maxlida.png"
+              alt="MAXLIDA Stationery Shop"
+              class="logo-image"
+            />
+          </a>
         </div>
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search for products..."
+            data-lang-key="search_placeholder"
+          />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="header-actions">
+          <a href="cart.html" class="action-link cart-link"
+            ><i class="fas fa-shopping-cart"></i
+          ></a>
+        </div>
+      </div>
     </header>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb-container">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="index.html" data-lang-key="home">Home</a></li>
-                <li><span class="category-name" data-lang-key="office_supplies">Office Supplies</span></li>
-            </ul>
-        </div>
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="index.html" data-lang-key="home">Home</a></li>
+          <li>
+            <span class="category-name" data-lang-key="office_supplies"
+              >Office Supplies</span
+            >
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- Main Category Content -->
     <div class="container">
-        <!-- Mobile Filter Toggle -->
-        <div class="filter-toggle" id="filterToggle">
-            <i class="fas fa-filter"></i>
-            <span data-lang-key="filter_products">Filter Products</span>
+      <!-- Mobile Filter Toggle -->
+      <div class="filter-toggle" id="filterToggle">
+        <i class="fas fa-filter"></i>
+        <span data-lang-key="filter_products">Filter Products</span>
+      </div>
+
+      <div class="category-container">
+        <!-- Filter Sidebar -->
+        <div class="filter-sidebar" id="filterSidebar">
+          <div class="search-filter">
+            <h3>
+              <i class="fas fa-search"></i>
+              <span data-lang-key="search_filter">SEARCH FILTER</span>
+            </h3>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-section">
+            <h3 data-lang-key="all_categories">All Categories</h3>
+            <ul class="filter-options">
+              <li>
+                <label>
+                  <input type="checkbox" value="set" />
+                  <span data-lang-key="set">Set</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="desk" />
+                  <span data-lang-key="desk">Desk</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="sticky_notes" />
+                  <span data-lang-key="sticky_notes">Sticky Notes</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="notebook" />
+                  <span data-lang-key="notebook">Notebook</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-section">
+            <h3 data-lang-key="price_range">Price Range</h3>
+            <div class="price-range">
+              <input
+                type="text"
+                placeholder="RM MIN"
+                id="minPrice"
+                data-lang-key="min_price"
+                data-lang-attr="placeholder"
+              />
+              <span>-</span>
+              <input
+                type="text"
+                placeholder="RM MAX"
+                id="maxPrice"
+                data-lang-key="max_price"
+                data-lang-attr="placeholder"
+              />
+            </div>
+            <button class="filter-button" data-lang-key="apply">APPLY</button>
+          </div>
+
+          <!-- Clear All Filters -->
+          <div class="filter-section">
+            <button class="clear-button" data-lang-key="clear_all">
+              CLEAR ALL
+            </button>
+          </div>
         </div>
 
-        <div class="category-container">
-            <!-- Filter Sidebar -->
-            <div class="filter-sidebar" id="filterSidebar">
-                <div class="search-filter">
-                    <h3><i class="fas fa-search"></i> <span data-lang-key="search_filter">SEARCH FILTER</span></h3>
-                </div>
-
-                <!-- Category Filter -->
-                <div class="filter-section">
-                    <h3 data-lang-key="all_categories">All Categories</h3>
-                    <ul class="filter-options">
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="pens_pencils">Pens & Pencils</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="desk">Desk</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="electronic">Electronic</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Rating Filter -->
-                <div class="filter-section">
-                    <h3 data-lang-key="rating">Rating</h3>
-                    <ul class="filter-options">
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="five_stars">★★★★★</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="four_stars_up">★★★★☆ & Up</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="three_stars_up">★★★☆☆ & Up</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox">
-                                <span data-lang-key="two_stars_up">★★☆☆☆ & Up</span>
-                            </label>
-                        </li>
-                    </ul>
-                    <a href="#" class="more-link" data-lang-key="more">More</a>
-                </div>
-
-                <!-- Price Range Filter -->
-                <div class="filter-section">
-                    <h3 data-lang-key="price_range">Price Range</h3>
-                    <div class="price-range">
-                        <input type="text" placeholder="RM MIN" id="minPrice" data-lang-key="min_price" data-lang-attr="placeholder">
-                        <span>-</span>
-                        <input type="text" placeholder="RM MAX" id="maxPrice" data-lang-key="max_price" data-lang-attr="placeholder">
-                    </div>
-                    <button class="filter-button" data-lang-key="apply">APPLY</button>
-                </div>
-
-                <!-- Clear All Filters -->
-                <div class="filter-section">
-                    <button class="clear-button" data-lang-key="clear_all">CLEAR ALL</button>
-                </div>
+        <!-- Product Grid Container -->
+        <div class="product-grid-container">
+          <div class="category-header">
+            <div class="category-title-container">
+              <h1 class="category-title" data-lang-key="office_supplies">
+                Office Supplies
+              </h1>
             </div>
+          </div>
 
-            <!-- Product Grid Container -->
-            <div class="product-grid-container">
-                <div class="category-header">
-                    <div class="category-title-container">
-                        <h1 class="category-title" data-lang-key="office_supplies">Office Supplies</h1>
-                    </div>
-                    <div class="sort-options">
-                        <span data-lang-key="sort_by">Sort by:</span>
-                        <span class="sort-option active" data-lang-key="popular">Popular</span>
-                        <span class="sort-option" data-lang-key="latest">Latest</span>
-                        <span class="sort-option" data-lang-key="top_sales">Top Sales</span>
-                        <span class="sort-option" data-lang-key="price">Price</span>
-                    </div>
+          <!-- Product Grid -->
+          <div class="product-grid">
+            <!-- Example Product Cards -->
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/gel_pens.png" alt="Gel Pen Set" />
+                <div class="discount-tag">30% OFF</div>
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="colorful_gel_pens">
+                  10-Pack Colorful Gel Pens Set
+                </h3>
+                <div class="price">
+                  <span class="current-price">RM12.50</span>
+                  <span class="original-price">RM17.90</span>
                 </div>
-
-                <!-- Product Grid -->
-                <div class="product-grid">
-                    <!-- Product Card 1 - Gel Pen Set -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/gel_pens.png" alt="Gel Pen Set">
-                            <div class="discount-tag">30% OFF</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="colorful_gel_pens">10-Pack Colorful Gel Pens</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(101)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM12.50</span>
-                                <span class="original-price">RM17.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_limited">Limited Edition</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 2 - Desk Organizer with Wireless Charger -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/desk_organizer.jpg" alt="Desk Organizer with Wireless Charger">
-                            <div class="discount-tag" data-lang-key="discount_percent" data-lang-params='{"percent": "15"}'>15% OFF</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="desk_organizer_charger">Desk Organizer with Wireless Charger</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(97)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM89.90</span>
-                                <span class="original-price">RM105.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_tech">Tech</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 3 - LED Desk Lamp -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/desk_lamp.png" alt="LED Desk Lamp">
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="led_desk_lamp">Adjustable LED Desk Lamp with USB Port</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(96)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM79.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_energy_efficient">Energy Efficient</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 4 - Designer Sticky Notes -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/sticky_note.png" alt="Designer Sticky Notes">
-                            <div class="discount-tag" data-lang-key="discount_percent" data-lang-params='{"percent": "20"}'>20% OFF</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="designer_sticky_notes">Designer Sticky Notes Collection</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(93)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM19.90</span>
-                                <span class="original-price">RM24.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_value_pack">Value Pack</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 5 - Bamboo Desk Set -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/bamboo_desk.png" alt="Bamboo Desk Set">
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="bamboo_desk_set">Bamboo Desk Accessory Set</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(35)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM65.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_sustainable">Sustainable</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 6 - Smart Notebook -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/reusable_notebook.png" alt="Smart Notebook">
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="smart_notebook">Smart Reusable Notebook</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(68)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM129.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_tech">Tech</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 7 - Luxury Pen Set -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/fountain_pen.png" alt="Luxury Pen Set">
-                        </div>
-                        <div class="product-info">
-                            <h3>Luxury Fountain Pen Set</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(89)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM129.00</span>
-                                <span class="original-price">RM159.90</span>
-                            </div>
-                            <div class="tags">
-                                <span class="tag" data-lang-key="tag_premium">Premium</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product Card 8 - Pastel Highlighter Set -->
-                    <a href="product-detail.html" class="product-card">
-                        <div class="product-image">
-                            <img src="images/highlighter_set.png" alt="Pastel Highlighters">
-                        </div>
-                        <div class="product-info">
-                            <h3 data-lang-key="pastel_highlighters">Pastel Highlighter Set (10 Colors)</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(31)</span>
-                            </div>
-                            <div class="price">
-                                <span class="current-price">RM24.90</span>
-                            </div>
-                        </div>
-                        <div class="tags">
-                            <span class="tag" data-lang-key="tag_value_pack">Value Pack</span>
-                        </div>
-                    </a>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/desk_organizer.jpg" alt="Desk Organizer" />
+                <div class="discount-tag">15% OFF</div>
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="desk_organizer">Desk Organizer</h3>
+                <div class="price">
+                  <span class="current-price">RM89.90</span>
+                  <span class="original-price">RM105.90</span>
                 </div>
-            </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/desk_lamp.png" alt="LED Desk Lamp" />
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="led_desk_lamp">
+                  Adjustable LED Desk Lamp with USB Port
+                </h3>
+                <div class="price">
+                  <span class="current-price">RM79.90</span>
+                </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/sticky_note.png" alt="Designer Sticky Notes" />
+                <div class="discount-tag">20% OFF</div>
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="designer_sticky_notes">
+                  Designer Sticky Notes Collection
+                </h3>
+                <div class="price">
+                  <span class="current-price">RM19.90</span>
+                  <span class="original-price">RM24.90</span>
+                </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/bamboo_desk.png" alt="Bamboo Desk Set" />
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="bamboo_desk_set">
+                  Bamboo Desk Accessory Set
+                </h3>
+                <div class="price">
+                  <span class="current-price">RM65.90</span>
+                </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/reusable_notebook.png" alt="Smart Notebook" />
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="smart_notebook">Smart Reusable Notebook</h3>
+                <div class="price">
+                  <span class="current-price">RM129.90</span>
+                </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img src="images/fountain_pen.png" alt="Luxury Pen Set" />
+              </div>
+              <div class="product-info">
+                <h3>Luxury Fountain Pen Set</h3>
+                <div class="price">
+                  <span class="current-price">RM129.00</span>
+                  <span class="original-price">RM159.90</span>
+                </div>
+              </div>
+            </a>
+            <a href="product-detail.html" class="product-card">
+              <div class="product-image">
+                <img
+                  src="images/highlighter_set.png"
+                  alt="Pastel Highlighters"
+                />
+              </div>
+              <div class="product-info">
+                <h3 data-lang-key="pastel_highlighters">
+                  Pastel Highlighter Set (10 Colors)
+                </h3>
+                <div class="price">
+                  <span class="current-price">RM24.90</span>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="container" style="text-align: center;">
-            <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
-                <div class="footer-section">
-                    <h3 data-lang-key="customer_service">Customer Service</h3>
-                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
-                        <li><a href="#" data-lang-key="help_center">Help Center</a></li>
-                        <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
-                        <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
-                        <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
-                        <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
-                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
-                        <li><a href="#" data-lang-key="about_us">About Us</a></li>
-                        <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
-                        <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
-                        <li><a href="#" data-lang-key="careers">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="payment">Payment</h3>
-                    <div class="payment-icons" style="text-align: center;">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="follow_us">Follow Us</h3>
-                    <div class="social-icons" style="text-align: center;">
-                        <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+      <div class="container" style="text-align: center">
+        <div
+          class="footer-content"
+          style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+          "
+        >
+          <div class="footer-section">
+            <h3 data-lang-key="customer_service">Customer Service</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+              <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+              <li>
+                <a href="#" data-lang-key="shipping_delivery"
+                  >Shipping & Delivery</a
+                >
+              </li>
+              <li>
+                <a href="#" data-lang-key="return_refund">Return & Refund</a>
+              </li>
+              <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="about_us">About Us</a></li>
+              <li>
+                <a href="#" data-lang-key="privacy_policy">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#" data-lang-key="terms_conditions"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li><a href="#" data-lang-key="careers">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="payment">Payment</h3>
+            <div class="payment-icons" style="text-align: center">
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-mastercard"></i>
+              <i class="fab fa-cc-paypal"></i>
+              <i class="fas fa-money-bill-wave"></i>
             </div>
-            <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
-                <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="follow_us">Follow Us</h3>
+            <div class="social-icons" style="text-align: center">
+              <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
             </div>
+          </div>
         </div>
+        <div class="footer-bottom" style="text-align: center; margin-top: 20px">
+          <p>
+            &copy; 2025 MAXLIDA Stationery Shop.
+            <span data-lang-key="all_rights_reserved">All Rights Reserved</span
+            >.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <script src="language.js"></script>
     <script>
-        // Immediately execute this script to ensure categories are updated
-        (function() {
-            // Force update of category labels
-            setTimeout(function() {
-                const categoryLabels = document.querySelectorAll('.filter-options li');
-                
-                // Clear existing categories if needed
-                if (categoryLabels.length >= 3) {
-                    const firstLabel = categoryLabels[0].querySelector('span');
-                    const secondLabel = categoryLabels[1].querySelector('span');
-                    const thirdLabel = categoryLabels[2].querySelector('span');
-                    
-                    if (firstLabel) {
-                        firstLabel.setAttribute('data-lang-key', 'pens_pencils');
-                        firstLabel.textContent = 'Pens & Pencils';
-                    }
-                    
-                    if (secondLabel) {
-                        secondLabel.setAttribute('data-lang-key', 'desk_accessories');
-                        secondLabel.textContent = 'Desk Accessories';
-                    }
-                    
-                    if (thirdLabel) {
-                        thirdLabel.setAttribute('data-lang-key', 'office_supplies');
-                        thirdLabel.textContent = 'Office Supplies';
-                    }
-                }
-            }, 100);
-        })();
-    </script>
-    <script>
-        // Language switcher functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Force update of category labels to ensure they display correctly
-            const categoryLabels = document.querySelectorAll('.filter-options span[data-lang-key]');
-            categoryLabels.forEach(label => {
-                const key = label.getAttribute('data-lang-key');
-                const currentLang = localStorage.getItem('language') || 'english';
-                if (translations[currentLang] && translations[currentLang][key]) {
-                    label.textContent = translations[currentLang][key];
-                }
-            });
-            
-            // Get category from URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category');
-            
-            // Update page based on category
-            if (category) {
-                updateCategoryPage(category);
-            }
-            
+      document.addEventListener("DOMContentLoaded", function () {
+        // Filter toggle for mobile
+        const filterToggle = document.getElementById("filterToggle");
+        const filterSidebar = document.getElementById("filterSidebar");
+        if (filterToggle && filterSidebar) {
+          filterToggle.addEventListener("click", function () {
+            filterSidebar.classList.toggle("active");
+          });
+        }
 
-            
-            // Set initial language based on localStorage or default to English
-            const currentLang = localStorage.getItem('language') || 'english';
-            document.querySelector('.current-lang').textContent = currentLang === 'english' ? 'English' : 'Bahasa Melayu';
-            updateLanguage(currentLang);
-            
-            // Language switcher
-            const languageOptions = document.querySelectorAll('.language-option');
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const lang = this.getAttribute('data-lang');
-                    localStorage.setItem('language', lang);
-                    document.querySelector('.current-lang').textContent = lang === 'english' ? 'English' : 'Bahasa Melayu';
-                    updateLanguage(lang);
-                });
-            });
-            
-            // Language toggle dropdown
-            const languageToggle = document.querySelector('.language-toggle');
-            if (languageToggle) {
-                languageToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector('.language-options').classList.toggle('show');
-                });
-            }
-            
-            // Close language dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.language-dropdown')) {
-                    const dropdown = document.querySelector('.language-options');
-                    if (dropdown && dropdown.classList.contains('show')) {
-                        dropdown.classList.remove('show');
-                    }
-                }
-            });
-            
-            // Filter toggle for mobile
-            const filterToggle = document.getElementById('filterToggle');
-            const filterSidebar = document.getElementById('filterSidebar');
-            
-            if (filterToggle && filterSidebar) {
-                filterToggle.addEventListener('click', function() {
-                    filterSidebar.classList.toggle('active');
-                });
-            }
-            
-            // Sort options functionality
-            const sortOptions = document.querySelectorAll('.sort-option');
-            sortOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active class from all options
-                    sortOptions.forEach(opt => opt.classList.remove('active'));
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    
-                    // Sort products based on selected option
-                    const sortBy = this.textContent.toLowerCase();
-                    sortProducts(sortBy);
-                });
-            });
-            
-            // Price range filter
-            const applyButton = document.querySelector('.filter-button');
-            if (applyButton) {
-                applyButton.addEventListener('click', function() {
-                    const minPrice = document.getElementById('minPrice').value;
-                    const maxPrice = document.getElementById('maxPrice').value;
-                    filterByPrice(minPrice, maxPrice);
-                });
-            }
-            
-            // Clear all filters
-            const clearButton = document.querySelector('.clear-button');
-            if (clearButton) {
-                clearButton.addEventListener('click', function() {
-                    // Reset all checkboxes
-                    document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(checkbox => {
-                        checkbox.checked = false;
-                    });
-                    
-                    // Reset price inputs
-                    document.getElementById('minPrice').value = '';
-                    document.getElementById('maxPrice').value = '';
-                    
-                    // Reset products display
-                    resetFilters();
-                });
-            }
-        });
-        
-        // Update category page based on selected category
-        function updateCategoryPage(category) {
-            // For office_supplies.html, we always use office_supplies category
-            category = 'office_supplies';
-            
-            // Update breadcrumb and page title
-            document.querySelector('.category-name').setAttribute('data-lang-key', category);
-            
-            // The "Pens & Pencils" checkbox is already checked by default in the HTML
-            // No need to programmatically check any checkboxes
-            
-            // All products on this page are already office supplies
-            // so no additional filtering is needed
-        }
-        
-        // Sort products based on selected option
-        function sortProducts(sortBy) {
-            const productGrid = document.querySelector('.product-grid');
-            const products = Array.from(productGrid.querySelectorAll('.product-card'));
-            
-            products.sort((a, b) => {
-                if (sortBy === 'popular') {
-                    // Sort by popularity (this is just an example - you would need real data)
-                    return 0; // No change for now
-                } else if (sortBy === 'latest') {
-                    // Sort by date (newest first)
-                    return 0; // No change for now
-                } else if (sortBy === 'top sales') {
-                    // Sort by sales volume
-                    return 0; // No change for now
-                } else if (sortBy === 'price') {
-                    // Sort by price (lowest first)
-                    const priceA = parseFloat(a.querySelector('.current-price').textContent.replace('RM', ''));
-                    const priceB = parseFloat(b.querySelector('.current-price').textContent.replace('RM', ''));
-                    return priceA - priceB;
-                }
-                return 0;
-            });
-            
-            // Clear the product grid
-            productGrid.innerHTML = '';
-            
-            // Add sorted products back to the grid
-            products.forEach(product => {
-                productGrid.appendChild(product);
-            });
-        }
-        
-        // Filter products by price range
-        function filterByPrice(min, max) {
-            const products = document.querySelectorAll('.product-card');
-            
-            products.forEach(product => {
-                const priceText = product.querySelector('.current-price').textContent;
-                const price = parseFloat(priceText.replace('RM', ''));
-                
-                if ((min === '' || price >= parseFloat(min)) && 
-                    (max === '' || price <= parseFloat(max))) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
-        
-        // Reset all filters
-        function resetFilters() {
-            const products = document.querySelectorAll('.product-card');
-            products.forEach(product => {
-                product.style.display = 'block';
-            });
-        }
-        
-        // Update language function
-        function updateLanguage(lang) {
-            const elements = document.querySelectorAll('[data-lang-key]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                const attrName = element.getAttribute('data-lang-attr');
-                const paramsAttr = element.getAttribute('data-lang-params');
-                
-                if (translations[lang] && translations[lang][key]) {
-                    let translatedText = translations[lang][key];
-                    
-                    // Handle parameters if they exist
-                    if (paramsAttr) {
-                        try {
-                            const params = JSON.parse(paramsAttr);
-                            Object.keys(params).forEach(param => {
-                                translatedText = translatedText.replace(`{${param}}`, params[param]);
-                            });
-                        } catch (e) {
-                            console.error('Error parsing data-lang-params:', e);
-                        }
-                    }
-                    
-                    // Update attribute or text content
-                    if (attrName) {
-                        element.setAttribute(attrName, translatedText);
-                    } else {
-                        element.textContent = translatedText;
-                    }
-                }
-            });
-            
-            // Update placeholders
-            const searchInputs = document.querySelectorAll('input[data-lang-key="search_placeholder"]');
-            searchInputs.forEach(input => {
-                if (translations[lang] && translations[lang]['search_placeholder']) {
-                    input.placeholder = translations[lang]['search_placeholder'];
-                }
-            });
-            
-            const helpSearchInput = document.querySelector('input[data-lang-key="search_placeholder_help"]');
-            if (helpSearchInput && translations[lang] && translations[lang]['search_placeholder_help']) {
-                helpSearchInput.placeholder = translations[lang]['search_placeholder_help'];
-            }
-        }
-        
+        // Category and price filter logic
+        const applyButton = document.querySelector(".filter-button");
+        if (applyButton) {
+          applyButton.addEventListener("click", function () {
+            // Get checked categories
+            const checkedCategories = Array.from(
+              document.querySelectorAll(
+                '.filter-options input[type="checkbox"]:checked'
+              )
+            ).map((cb) => cb.value);
 
+            // Get price range values
+            const minPrice =
+              parseFloat(document.getElementById("minPrice").value) || 0;
+            const maxPriceInput = document.getElementById("maxPrice").value;
+            const maxPrice = maxPriceInput
+              ? parseFloat(maxPriceInput)
+              : Infinity;
+
+            document.querySelectorAll(".product-card").forEach((card) => {
+              let show = false;
+              const title = card.querySelector("h3")?.textContent || "";
+
+              // Get product price (assumes .current-price exists and is formatted like "RM45.90")
+              const priceText =
+                card.querySelector(".current-price")?.textContent || "";
+              const priceMatch = priceText.match(/[\d.]+/);
+              const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+
+              // Category filter
+              if (checkedCategories.length === 0) {
+                show = true; // No category filter, show all (but still filter by price)
+              } else {
+                // Set filter
+                if (checkedCategories.includes("set")) {
+                  if (/set/i.test(title)) {
+                    show = true;
+                  }
+                }
+                // Desk filter
+                if (checkedCategories.includes("desk")) {
+                  if (/desk/i.test(title)) {
+                    show = true;
+                  }
+                }
+                // Sticky Notes filter
+                if (checkedCategories.includes("sticky_notes")) {
+                  if (/sticky\s*notes?/i.test(title)) {
+                    show = true;
+                  }
+                }
+                // Notebook filter
+                if (checkedCategories.includes("notebook")) {
+                  if (
+                    /\bNotebook\b/i.test(title) ||
+                    /\bNotebooks\b/i.test(title)
+                  ) {
+                    show = true;
+                  }
+                }
+              }
+
+              // Price filter (only show if price is within range)
+              if (show && (price < minPrice || price > maxPrice)) {
+                show = false;
+              }
+
+              card.style.display = show ? "block" : "none";
+            });
+          });
+        }
+
+        // Clear all filters
+        const clearButton = document.querySelector(".clear-button");
+        if (clearButton) {
+          clearButton.addEventListener("click", function () {
+            // Reset all checkboxes
+            document
+              .querySelectorAll('.filter-options input[type="checkbox"]')
+              .forEach((checkbox) => {
+                checkbox.checked = false;
+              });
+
+            // Reset price inputs
+            document.getElementById("minPrice").value = "";
+            document.getElementById("maxPrice").value = "";
+
+            // Reset products display
+            document.querySelectorAll(".product-card").forEach((card) => {
+              card.style.display = "block";
+            });
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
