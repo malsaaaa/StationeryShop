@@ -1,354 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-lang-key="login_page_title">Login MAXLIDA Stationery</title>
-    <link rel="icon" href="/images/maxlida.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="/images/maxlida.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <script src="language.js"></script>
     <style>
-        /* Login page specific styles */
+      /* Login page specific styles */
+      .login-container {
+        display: flex;
+        min-height: 100vh;
+        background-color: #1a73e8;
+      }
+      .login-branding {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+      .login-branding img {
+        width: 180px;
+        margin-bottom: 2rem;
+      }
+      .login-branding h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      .login-form-container {
+        flex: 1;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+      .login-form {
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      }
+      .login-form h1 {
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        color: #333;
+      }
+      .login-form input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 1rem;
+        border: 1px solid #1a73e8;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      .login-form input:focus {
+        outline: none;
+        border-color: #1a73e8;
+      }
+      .login-form button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+      }
+      .login-form button:hover {
+        background-color: #1a73e8;
+      }
+      .forgot-password {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .forgot-password a {
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .signup-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+      }
+      .signup-link a {
+        color: #1a73e8;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .header-login {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: white;
+      }
+      .header-login .logo {
+        display: flex;
+        align-items: center;
+      }
+      .header-login .logo img {
+        height: 30px;
+        margin-right: 5px;
+      }
+      .header-login .logo span {
+        color: #1a73e8;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .header-login a {
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 768px) {
         .login-container {
-            display: flex;
-            min-height: 100vh;
-            background-color: #1a73e8;
+          flex-direction: column;
         }
-        
         .login-branding {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 2rem;
-            text-align: center;
+          padding: 2rem 1rem;
         }
-        
-        .login-branding img {
-            width: 180px;
-            margin-bottom: 2rem;
-        }
-        
-        .login-branding h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-        
         .login-form-container {
-            flex: 1;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
+          padding: 1rem;
         }
-        
-        .login-form {
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .login-form h1 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: #333;
-        }
-        
-        .login-form input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid #1a73e8;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        .login-form input:focus {
-            outline: none;
-            border-color: #1a73e8;
-        }
-        
-        .login-form button {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-        
-        .login-form button:hover {
-            background-color: #1a73e8;
-        }
-        
-        .forgot-password {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .forgot-password a {
-            color: #666;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .login-divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: #999;
-        }
-        
-        .login-divider::before,
-        .login-divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .login-divider span {
-            padding: 0 10px;
-            font-size: 0.9rem;
-        }
-        
-        .social-login {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        
-        .social-login button {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .social-login button:hover {
-            background-color: #f9f9f9;
-        }
-        
-        .social-login .facebook {
-            color: #1877f2;
-        }
-        
-        .social-login .google {
-            color: #db4437;
-        }
-        
-        .signup-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .signup-link a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .header-login {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: white;
-        }
-        
-        .header-login .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-login .logo img {
-            height: 30px;
-            margin-right: 5px;
-        }
-        
-        .header-login .logo span {
-            color: #1a73e8;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .header-login a {
-            color: #666;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-            }
-            
-            .login-branding {
-                padding: 2rem 1rem;
-            }
-            
-            .login-form-container {
-                padding: 1rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Simple Header -->
     <div class="header-login">
-        <div class="logo">
-            <a href="index.html"><img src="images/maxlida.png" alt="MAXLIDA Logo"></a>
-            <span data-lang-key="shop_name">MAXLIDA Stationery</span>
+      <div class="logo">
+        <a href="index.html"
+          ><img src="images/maxlida.png" alt="MAXLIDA Logo"
+        /></a>
+        <span data-lang-key="shop_name">MAXLIDA Stationery</span>
+      </div>
+      <div class="top-nav-right">
+        <div class="language-dropdown">
+          <a href="#" class="language-toggle"
+            ><i class="fas fa-globe"></i>
+            <span class="current-lang">English</span></a
+          >
+          <div class="language-options">
+            <a href="#" class="language-option" data-lang="english">English</a>
+            <a href="#" class="language-option" data-lang="malay"
+              >Bahasa Melayu</a
+            >
+          </div>
         </div>
-        <div class="top-nav-right">
-            <div class="language-dropdown">
-                <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
-                <div class="language-options">
-                    <a href="#" class="language-option" data-lang="english">English</a>
-                    <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
-                </div>
-            </div>
-            <span class="divider">|</span>
-            <a href="#" data-lang-key="need_help">Need help?</a>
-        </div>
+        <span class="divider">|</span>
+        <a href="#" data-lang-key="need_help">Need help?</a>
+      </div>
     </div>
 
     <!-- Login Container -->
     <div class="login-container">
-        <!-- Left Side - Branding -->
-        <div class="login-branding">
-            <img src="images/maxlida.png" alt="MAXLIDA Logo">
-            <h2 data-lang-key="login_tagline">The leading stationery shop in Malaysia</h2>
-            <p data-lang-key="login_description">Quality stationery products for work, school, and creativity</p>
+      <!-- Left Side - Branding -->
+      <div class="login-branding">
+        <img src="images/maxlida.png" alt="MAXLIDA Logo" />
+        <h2 data-lang-key="login_tagline">
+          The leading stationery shop in Malaysia
+        </h2>
+        <p data-lang-key="login_description">
+          Quality stationery products for work, school, and creativity
+        </p>
+      </div>
+
+      <!-- Right Side - Login Form -->
+      <div class="login-form-container">
+        <div class="login-form">
+          <h1 data-lang-key="login">Log In</h1>
+          <form id="loginForm">
+            <input
+              id="login-username"
+              type="text"
+              placeholder="Email/Username/Phone"
+              data-lang-key="login_placeholder"
+              data-lang-attr="placeholder"
+              required
+            />
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Password"
+              data-lang-key="password_placeholder"
+              data-lang-attr="placeholder"
+              required
+            />
+            <button type="submit" data-lang-key="login_button">LOG IN</button>
+          </form>
+          <div class="forgot-password">
+            <a href="#" data-lang-key="forgot_password">Forgot Password?</a>
+          </div>
+          <div class="admin-staff-login">
+            <button
+              id="admin-login-btn"
+              style="
+                background-color: #4caf50;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 20px;
+                width: 100%;
+              "
+            >
+              <i class="fas fa-user-shield"></i>
+              <span data-lang-key="admin_staff_login">Admin/Staff Login</span>
+            </button>
+          </div>
+          <div class="signup-link">
+            <span data-lang-key="new_to_maxlida">New to MAXLIDA?</span>
+            <a href="sign_up.html" data-lang-key="sign_up">Sign up</a>
+          </div>
         </div>
-        
-        <!-- Right Side - Login Form -->
-        <div class="login-form-container">
-            <div class="login-form">
-                <h1 data-lang-key="login">Log In</h1>
-                
-                <form id="loginForm">
-                    <input type="text" placeholder="Email/Username/Phone" data-lang-key="login_placeholder" data-lang-attr="placeholder">
-                    <input type="password" placeholder="Password" data-lang-key="password_placeholder" data-lang-attr="placeholder">
-                    <button type="submit" data-lang-key="login_button">LOG IN</button>
-                </form>
-                
-                <div class="forgot-password">
-                    <a href="#" data-lang-key="forgot_password">Forgot Password?</a>
-                </div>
-        
-                <div class="admin-staff-login">
-                    <button id="admin-login-btn" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; width: 100%;">
-                        <i class="fas fa-user-shield"></i>
-                        <span data-lang-key="admin_staff_login">Admin/Staff Login</span>
-                    </button>
-                </div>
-                
-                <div class="signup-link">
-                    <span data-lang-key="new_to_maxlida">New to MAXLIDA?</span>
-                    <a href="sign_up.html" data-lang-key="sign_up">Sign up</a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="container" style="text-align: center;">
-            <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
-                <div class="footer-section">
-                    <h3 data-lang-key="customer_service">Customer Service</h3>
-                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
-                        <li><a href="#" data-lang-key="help_center">Help Center</a></li>
-                        <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
-                        <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
-                        <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
-                        <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
-                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
-                        <li><a href="#" data-lang-key="about_us">About Us</a></li>
-                        <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
-                        <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
-                        <li><a href="#" data-lang-key="careers">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="payment">Payment</h3>
-                    <div class="payment-icons" style="text-align: center;">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3 data-lang-key="follow_us">Follow Us</h3>
-                    <div class="social-icons" style="text-align: center;">
-                        <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+      <div class="container" style="text-align: center">
+        <div
+          class="footer-content"
+          style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+          "
+        >
+          <div class="footer-section">
+            <h3 data-lang-key="customer_service">Customer Service</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+              <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+              <li>
+                <a href="#" data-lang-key="shipping_delivery"
+                  >Shipping & Delivery</a
+                >
+              </li>
+              <li>
+                <a href="#" data-lang-key="return_refund">Return & Refund</a>
+              </li>
+              <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+            <ul
+              style="padding-left: 0; list-style-type: none; text-align: center"
+            >
+              <li><a href="#" data-lang-key="about_us">About Us</a></li>
+              <li>
+                <a href="#" data-lang-key="privacy_policy">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#" data-lang-key="terms_conditions"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li><a href="#" data-lang-key="careers">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="payment">Payment</h3>
+            <div class="payment-icons" style="text-align: center">
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-mastercard"></i>
+              <i class="fab fa-cc-paypal"></i>
+              <i class="fas fa-money-bill-wave"></i>
             </div>
-            <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
-                <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+          </div>
+          <div class="footer-section">
+            <h3 data-lang-key="follow_us">Follow Us</h3>
+            <div class="social-icons" style="text-align: center">
+              <a
+                href="https://www.facebook.com/p/MAX-LIDA-100069366986077/"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/maxlidaent/?hl=en"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
             </div>
+          </div>
         </div>
+        <div class="footer-bottom" style="text-align: center; margin-top: 20px">
+          <p>
+            &copy; 2025 MAXLIDA Stationery Shop.
+            <span data-lang-key="all_rights_reserved">All Rights Reserved</span
+            >.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update language on page load
-            const currentLang = localStorage.getItem('language') || 'english';
-            updateLanguage(currentLang);
-            
-            // Handle login form submission
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Here you would typically handle login authentication
-                // For now, we'll just redirect back to the home page
-                window.location.href = 'index.html';
-            });
-            
-            // Handle admin/staff login button
-            document.getElementById('admin-login-btn').addEventListener('click', function() {
-                window.location.href = 'admin_login.html';
-            });
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Update language on page load
+        const currentLang = localStorage.getItem("language") || "english";
+        if (typeof updateLanguage === "function") updateLanguage(currentLang);
 
-        // Language switching function
-        function updateLanguage(lang) {
-            const elements = document.querySelectorAll('[data-lang-key]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                const attrName = element.getAttribute('data-lang-attr');
-                if (translations[lang] && translations[lang][key]) {
-                    if (attrName) {
-                        element.setAttribute(attrName, translations[lang][key]);
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
-            localStorage.setItem('language', lang);
-        }
+        // Handle login form submission
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            // Get input values
+            const username = document.getElementById("login-username").value;
+            const password = document.getElementById("login-password").value;
+
+            // Get all registered users from localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if user exists
+            const foundUser = users.find(
+              (user) => user.username === username && user.password === password
+            );
+
+            if (foundUser) {
+              // Save logged-in user info (optional)
+              localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
+              // Redirect to home page
+              window.location.href = "index.html";
+            } else {
+              alert("Invalid username or password!");
+            }
+          });
+
+        // Handle admin/staff login button
+        document
+          .getElementById("admin-login-btn")
+          .addEventListener("click", function () {
+            window.location.href = "admin_login.html";
+          });
+      });
+
+      // Language switching function (dummy fallback)
+      function updateLanguage(lang) {
+        // This function should be defined in language.js
+      }
     </script>
-</body>
+  </body>
 </html>
