@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin/Staff Login</title>
+    <link rel="icon" href="/images/maxlida.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="language.js"></script>
+    <style>
+        /* Admin Login page specific styles */
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+            background-color: #4CAF50;
+        }
+        
+        .login-branding {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .login-branding img {
+            width: 180px;
+            margin-bottom: 2rem;
+        }
+        
+        .login-branding h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .login-form-container {
+            flex: 1;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .login-form h1 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #4CAF50;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .login-form input:focus {
+            outline: none;
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+        
+        .forgot-password a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .login-divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .login-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        .login-divider span {
+            position: relative;
+            background-color: white;
+            padding: 0 10px;
+            color: #757575;
+            font-size: 0.9rem;
+        }
+        
+        .back-to-customer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .back-to-customer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        /* Header styles */
+        .header-login {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+        
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+            display: none;
+            z-index: 10;
+        }
+        
+        .language-dropdown:hover .language-options {
+            display: block;
+        }
+        
+        .language-option {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .divider {
+            margin: 0 10px;
+            color: #ccc;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .login-branding {
+                padding: 2rem 1rem;
+            }
+            
+            .login-form-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Simple Header -->
+    <div class="header-login">
+        <div class="logo">
+            <a href="index.html"><img src="images/maxlida.png" alt="MAXLIDA Logo"></a>
+            <span>MAXLIDA Stationery</span>
+        </div>
+        <div class="top-nav-right">
+            <div class="language-dropdown">
+                <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
+                <div class="language-options">
+                    <a href="#" class="language-option" data-lang="english">English</a>
+                    <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+                </div>
+            </div>
+            <span class="divider">|</span>
+            <a href="#">Need help?</a>
+        </div>
+    </div>
+
+    
+    <!-- Login Container -->
+    <div class="login-container">
+        <!-- Left Side - Branding -->
+        <div class="login-branding">
+            <img src="images/maxlida.png" alt="MAXLIDA Logo">
+            <h2 data-lang-key="admin_login_title">Admin & Staff Portal</h2>
+            <p data-lang-key="admin_login_subtitle">Manage inventory, orders, and customer service</p>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div class="login-form-container">
+            <div class="login-form">
+                <h1 data-lang-key="admin_login_title">Admin/Staff Login</h1>
+                
+                <form id="adminLoginForm">
+                    <input type="text" data-lang-key="staff_id_placeholder" placeholder="Staff ID" id="staffId">
+                    <input type="password" placeholder="Password" id="adminPassword">
+                    <button type="submit" data-lang-key="login">LOGIN</button>
+                </form>
+                
+                <div class="forgot-password">
+                    <a href="#" data-lang-key="forgot_password">Forgot Password?</a>
+                </div>
+                
+                <div class="back-to-customer">
+                    <a href="login.html"><i class="fas fa-arrow-left"></i> <span data-lang-key="back_to_customer">Back to Customer Login</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container" style="text-align: center;">
+                <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
+                    <div class="footer-section">
+                        <h3 data-lang-key="customer_service">Customer Service</h3>
+                        <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                            <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+                            <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+                            <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
+                            <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
+                            <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+                        <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                            <li><a href="#" data-lang-key="about_us">About Us</a></li>
+                            <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
+                            <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
+                            <li><a href="#" data-lang-key="careers">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3 data-lang-key="payment">Payment</h3>
+                        <div class="payment-icons" style="text-align: center;">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3 data-lang-key="follow_us">Follow Us</h3>
+                        <div class="social-icons" style="text-align: center;">
+                            <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
+                    <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+                </div>
+            </div>
+        </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language
+            updateContent();
+            
+            // Language dropdown toggle
+            const languageToggle = document.querySelector('.language-toggle');
+            const languageOptions = document.querySelector('.language-options');
+            
+            if (languageToggle) {
+                languageToggle.addEventListener('click', function() {
+                    if (languageOptions.style.display === 'none') {
+                        languageOptions.style.display = 'block';
+                    } else {
+                        languageOptions.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Language selection
+            const languageOptionLinks = document.querySelectorAll('.language-option');
+            languageOptionLinks.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                    languageOptions.style.display = 'none';
+                    
+                    // Update the current language display
+                    const currentLangDisplay = document.querySelector('.current-lang');
+                    if (currentLangDisplay) {
+                        currentLangDisplay.textContent = lang === 'english' ? 'English' : 'Bahasa Melayu';
+                    }
+                });
+            });
+            
+            // Handle admin login form submission
+            document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const staffId = document.getElementById('staffId').value;
+                const password = document.getElementById('adminPassword').value;
+                
+                // Simple validation for demo purposes
+                if (staffId === 'admin' && password === 'admin123') {
+                    // Admin login
+                    window.location.href = 'admin_dashboard.html';
+                } else if (staffId === 'staff' && password === 'staff123') {
+                    // Staff login
+                    window.location.href = 'staff_dashboard.html';
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            });
+            
+            // Check if user has a saved language preference and apply it
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage && (savedLanguage === 'english' || savedLanguage === 'malay')) {
+                changeLanguage(savedLanguage);
+                
+                // Update the current language display
+                const currentLangDisplay = document.querySelector('.current-lang');
+                if (currentLangDisplay) {
+                    currentLangDisplay.textContent = savedLanguage === 'english' ? 'English' : 'Bahasa Melayu';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

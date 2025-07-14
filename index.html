@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxLida | Stationery & Book Store</title>
+    <link rel="icon" href="/images/maxlida.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <div class="container">
+            <div class="top-nav-left">
+                <h4 data-lang-key="follow_us">Follow us on</h4>
+                <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" class="social-icon" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/maxlidaent/?hl=en" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="top-nav-right">
+                <a href="help.html"><i class="far fa-question-circle"></i> <span data-lang-key="help">Help</span></a>
+                <div class="language-dropdown">
+                    <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
+                    <div class="language-options">
+                        <a href="#" class="language-option" data-lang="english">English</a>
+                        <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+                    </div>
+                </div>
+                <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
+                <span class="divider">|</span>
+                <a href="login.html" data-lang-key="login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/maxlida.png" alt="StationeryShop Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products..." data-lang-key="search_placeholder">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="category.html?category=books">
+                        <div class="category-img-container">
+                            <img src="images/books.png" alt="Books">
+                        </div>
+                        <span data-lang-key="books">Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html?category=pens_pencils">
+                        <div class="category-img-container">
+                            <img src="images/pens&pencils.png" alt="Pens & Pencils">
+                        </div>
+                        <span data-lang-key="pens_pencils">Pens & Pencils</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html?category=art_supplies">
+                        <div class="category-img-container">
+                            <img src="images/art_supplies.png" alt="Art Supplies">
+                        </div>
+                        <span data-lang-key="art_supplies">Art Supplies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="office_supplies.html?category=office_supplies">
+                        <div class="category-img-container">
+                            <img src="images/office_supplies.png" alt="Office Supplies">
+                        </div>
+                        <span data-lang-key="office_supplies">Office Supplies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html?category=school_essentials">
+                        <div class="category-img-container">
+                            <img src="images/school_essentials.png" alt="School Essentials">
+                        </div>
+                        <span data-lang-key="school_essentials">School Essentials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html?category=fashion">
+                        <div class="category-img-container">
+                            <img src="images/fashion.png" alt="Fashion">
+                        </div>
+                        <span data-lang-key="fashion">Fashion</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html?category=journals">
+                        <div class="category-img-container">
+                            <img src="images/journals.png" alt="Journals">
+                        </div>
+                        <span data-lang-key="journals">Journals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="category-img-container">
+                            <img src="images/craft_supplies.png" alt="Craft Supplies">
+                        </div>
+                        <span data-lang-key="craft_supplies">Craft Supplies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="category-img-container">
+                            <img src="images/desk_accessories.png" alt="Desk Accessories">
+                        </div>
+                        <span data-lang-key="desk_accessories">Desk Accessories</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Flash Sale Section -->
+    <section class="flash-sale">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-lang-key="flash_sale">Flash Sale</h2>
+                <a href="#" class="view-all"><span data-lang-key="see_all">See All</span> <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="product-grid">
+                <!-- Flash Sale Products -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/premium_notebook1.png" alt="Premium Notebook">
+                        <div class="discount-tag">50% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="premium_hardcover_notebook">Premium Hardcover Notebook</h3>
+                        <div class="price">
+                            <span class="current-price">RM15.90</span>
+                            <span class="original-price">RM31.80</span>
+                        </div>
+                        <div class="sold">120 sold</div>
+                    </div>
+                </a>
+                
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/gel_pens.png" alt="Gel Pen Set">
+                        <div class="discount-tag">30% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="colorful_gel_pens">10-Pack Colorful Gel Pens</h3>
+                        <div class="price">
+                            <span class="current-price">RM12.50</span>
+                            <span class="original-price">RM17.90</span>
+                        </div>
+                        <div class="sold">89 sold</div>
+                    </div>
+                </a>
+                
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/desk_organizer.jpg" alt="Desk Organizer">
+                        <div class="discount-tag">40% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="wooden_desk_organizer">Wooden Desk Organizer</h3>
+                        <div class="price">
+                            <span class="current-price">RM29.90</span>
+                            <span class="original-price">RM49.90</span>
+                        </div>
+                        <div class="sold">56 sold</div>
+                    </div>
+                </a>
+                
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/watercolor_set.jpg" alt="Watercolor Set">
+                        <div class="discount-tag">25% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="professional_watercolor_set">Professional Watercolor Set</h3>
+                        <div class="price">
+                            <span class="current-price">RM42.90</span>
+                            <span class="original-price">RM53.90</span>
+                        </div>
+                        <div class="sold">47 sold</div>
+                    </div>
+                </a>
+                
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/bestseller_novel.png" alt="Bestseller Book">
+                        <div class="discount-tag">20% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="bestseller_novel">Bestseller Novel - Hardcover</h3>
+                        <div class="price">
+                            <span class="current-price">RM39.90</span>
+                            <span class="original-price">RM49.90</span>
+                        </div>
+                        <div class="sold">78 sold</div>
+                    </div>
+                </a>
+                
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/tape_set.png" alt="Washi Tape Set">
+                        <div class="discount-tag">35% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="washi_tape_set">Decorative Washi Tape Set (10pcs)</h3>
+                        <div class="price">
+                            <span class="current-price">RM18.90</span>
+                            <span class="original-price">RM29.00</span>
+                        </div>
+                        <div class="sold">105 sold</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Items Section -->
+    <section class="featured-items">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-lang-key="featured_items">Featured Items</h2>
+                <a href="#" class="view-all"><span data-lang-key="see_all">See All</span> <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="product-grid">
+                <!-- Featured Item 1 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/leather_journal.png" alt="Premium Notebook">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Premium Leather Journal</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(124)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM45.90</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_bestseller">Bestseller</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Featured Item 2 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/fountain_pen.png" alt="Luxury Pen Set">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Luxury Fountain Pen Set</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(89)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM129.00</span>
+                            <span class="original-price">RM159.90</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_premium">Premium</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Featured Item 3 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/desk_organizer.jpg" alt="Desk Organizer">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="wooden_desk_organizer">Wooden Desk Organizer</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(56)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM78.50</span>
+                            <span class="original-price">RM95.00</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_handcrafted">Handcrafted</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Featured Item 4 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/art_kit.png" alt="Professional Art Set">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Professional Art Supply Kit</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(112)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM199.00</span>
+                            <span class="original-price">RM249.00</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_artist_choice">Artist Choice</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Featured Item 5 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/bamboo_desk2.png" alt="Desk Organizer">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bamboo Desk Organizer</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(87)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM39.90</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Featured Item 6 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/weekly_planner2.jpg" alt="Weekly Planner">
+                        <div class="product-tag">FEATURED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>2025 Weekly Planner</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(56)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM32.50</span>
+                            <span class="original-price">RM42.90</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Items Section -->
+    <section class="popular-items">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-lang-key="popular_items">Popular Items</h2>
+                <a href="#" class="view-all"><span data-lang-key="see_all">See All</span> <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="product-grid">
+                <!-- Popular Item 1 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/highlighter_set.png" alt="Pastel Highlighters">
+                        <div class="product-tag popular-tag">TOP RATED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="pastel_highlighters">Pastel Highlighter Set (10 Colors)</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(328)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM24.90</span>
+                        </div>
+                        <div class="sold">1,245 sold</div>
+                    </div>
+                </a>
+                <!-- Popular Item 2 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/sticky_note.png" alt="Sticky Notes">
+                        <div class="product-tag popular-tag">TOP RATED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="designer_sticky_notes">Designer Sticky Notes Collection</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(215)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM18.50</span>
+                            <span class="original-price">RM22.90</span>
+                        </div>
+                        <div class="sold">987 sold</div>
+                    </div>
+                </a>
+                <!-- Popular Item 3 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/weekly_planner.jpg" alt="Weekly Planner">
+                        <div class="product-tag popular-tag">TOP RATED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="weekly_planner">2025 Weekly Planner with Stickers</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(176)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM35.90</span>
+                            <span class="original-price">RM42.00</span>
+                        </div>
+                        <div class="sold">856 sold</div>
+                    </div>
+                </a>
+                <!-- Popular Item 4 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/12_pens.png" alt="Gel Pens">
+                        <div class="product-tag popular-tag">TOP RATED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="smooth_gel_pens">Smooth Gel Pens (0.5mm) 12-Pack</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(298)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM19.90</span>
+                            <span class="original-price">RM24.90</span>
+                        </div>
+                        <div class="sold">1,120 sold</div>
+                    </div>
+                </a>
+                
+                <!-- Popular Item 5 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/tape_set.png" alt="Washi Tape Set">
+                        <div class="product-tag popular-tag">TOP RATED</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Decorative Washi Tape Set (10 pcs)</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(203)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM19.90</span>
+                            <span class="original-price">RM24.90</span>
+                        </div>
+                        <div class="sold">1,245 sold</div>
+                    </div>
+                </a>               
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section class="new-arrivals">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-lang-key="new_arrivals">New Arrivals</h2>
+                <a href="#" class="view-all"><span data-lang-key="see_all">See All</span> <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="product-grid">
+                <!-- New Arrival 1 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/reusable_notebook.png" alt="Smart Notebook">
+                        <div class="product-tag new-tag">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="smart_notebook">Smart Reusable Notebook</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(42)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM89.90</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_eco_friendly">Eco-friendly</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- New Arrival 2 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/wireless_charger.png" alt="Desk Wireless Charger">
+                        <div class="product-tag new-tag">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="desk_organizer_charger">Desk Organizer with Wireless Charger</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(28)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM129.00</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_tech">Tech</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- New Arrival 3 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/bamboo_desk.png" alt="Bamboo Desk Set">
+                        <div class="product-tag new-tag">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="bamboo_desk_set">Bamboo Desk Accessory Set</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(35)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM65.00</span>
+                            <span class="original-price">RM75.00</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_sustainable">Sustainable</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- New Arrival 4 -->
+                <a href="product-detail.html" class="product-card">
+                    <div class="product-image">
+                        <img src="images/desk_lamp.png" alt="LED Desk Lamp">
+                        <div class="product-tag new-tag">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 data-lang-key="led_desk_lamp">Adjustable LED Desk Lamp with USB Port</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(19)</span>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">RM79.90</span>
+                            <span class="original-price">RM99.90</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag" data-lang-key="tag_energy_efficient">Energy Efficient</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <script src="language.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center;">
+            <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
+                <div class="footer-section">
+                    <h3 data-lang-key="customer_service">Customer Service</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+                        <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+                        <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
+                        <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
+                        <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="about_us">About Us</a></li>
+                        <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
+                        <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
+                        <li><a href="#" data-lang-key="careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="payment">Payment</h3>
+                    <div class="payment-icons" style="text-align: center;">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="follow_us">Follow Us</h3>
+                    <div class="social-icons" style="text-align: center;">
+                        <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
+                <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

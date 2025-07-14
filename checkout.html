@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="checkout_page_title">Checkout</title>
+    <link rel="icon" href="/images/maxlida.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Checkout specific styles */
+        .checkout-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .checkout-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .checkout-steps::after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e0e0e0;
+            z-index: -1;
+        }
+        .step {
+            background-color: #fff;
+            padding: 5px 10px;
+            text-align: center;
+            z-index: 1;
+        }
+        .step.active {
+            color: #1a73e8;
+            font-weight: bold;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin-right: 5px;
+        }
+        .step.active .step-number {
+            background-color: #1a73e8;
+            color: white;
+        }
+        .checkout-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title a {
+            font-size: 14px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .address-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .address-box.selected {
+            border-color: #1a73e8;
+            background-color: #f0f7ff;
+        }
+        .address-box.selected::before {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+        .address-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .address-details {
+            color: #666;
+            font-size: 14px;
+        }
+        .address-phone {
+            margin-top: 5px;
+            color: #666;
+        }
+        .product-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .product-list th {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+        }
+        .product-list td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        .product-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+        .product-details p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .product-price {
+            font-weight: 600;
+            color: #333;
+        }
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            width: calc(33.333% - 10px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .payment-method:hover {
+            border-color: #1a73e8;
+        }
+        .payment-method.selected {
+            border-color: #1a73e8;
+            background-color: #f0f7ff;
+        }
+        .payment-method img {
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        .payment-method p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .order-summary {
+            background-color: #f9f9f9;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 18px;
+            color: #1a73e8;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 10px;
+            padding-top: 15px;
+        }
+        .checkout-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #0d62c9;
+        }
+        .voucher-input {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .voucher-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        .voucher-input button {
+            padding: 10px 15px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .payment-method {
+                width: calc(50% - 10px);
+            }
+        }
+        @media (max-width: 576px) {
+            .payment-method {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <div class="container">
+            <div class="top-nav-left">
+                <h4 data-lang-key="follow_us">Follow us on</h4>
+                <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" class="social-icon" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/maxlidaent/?hl=en" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="top-nav-right">
+                <a href="help.html"><i class="far fa-question-circle"></i> <span data-lang-key="help">Help</span></a>
+                <div class="language-dropdown">
+                    <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
+                    <div class="language-options">
+                        <a href="#" class="language-option" data-lang="english">English</a>
+                        <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+                    </div>
+                </div>
+                <a href="sign_up.html" data-lang-key="sign_up">Sign Up</a>
+                <span class="divider">|</span>
+                <a href="login.html" data-lang-key="login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header with Checkout -->
+    <header class="main-header" style="background-color: #1a73e8;">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: flex-start; padding: 10px 0;">
+                <div class="logo" style="margin-left: 0px;">
+                    <a href="index.html">
+                        <img src="images/maxlida.png" alt="MAXLIDA Logo" class="logo-image" style="height: 50px;">
+                    </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span style="color: white; font-size: 18px; font-weight: 500; margin-left: 10px;">|</span>
+                    <h2 style="color: white; font-size: 18px; font-weight: 500; margin: 0 0 0 10px;" data-lang-key="checkout">Checkout</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Checkout Content -->
+    <div class="checkout-container">
+        <div class="checkout-steps">
+            <div class="step active">
+                <span class="step-number">1</span>
+                <span data-lang-key="shipping">Shipping</span>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span data-lang-key="payment">Payment</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span data-lang-key="review">Review</span>
+            </div>
+        </div>
+
+        <div class="checkout-section">
+            <div class="section-title">
+                <span data-lang-key="shipping_method">Shipping Method</span>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <div style="display: flex; margin-bottom: 15px;">
+                    <div style="margin-right: 15px;">
+                        <input type="radio" id="delivery" name="shipping-method" checked style="margin-right: 5px;">
+                        <label for="delivery" style="font-weight: 500;" data-lang-key="delivery">Delivery</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="pickup" name="shipping-method" style="margin-right: 5px;">
+                        <label for="pickup" style="font-weight: 500;" data-lang-key="in_store_pickup">In-Store Pickup</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="delivery-section">
+                <div class="section-title">
+                    <span data-lang-key="delivery_address">Delivery Address</span>
+                    <a href="#" data-lang-key="change">Change</a>
+                </div>
+                <div class="address-box selected">
+                    <div class="address-name">THOMAS BIN SHELBY (+60) 1234567890</div>
+                    <div class="address-details">Jalan 14, Taman Lian Keping, Petaling Jaya, 77300, Malaysia</div>
+                </div>
+            </div>
+            
+            <div id="pickup-section" style="display: none;">
+                <div class="section-title">
+                    <span data-lang-key="pickup_location">Pickup Location</span>
+                    <a href="#" data-lang-key="change">Change</a>
+                </div>
+                <div class="address-box selected">
+                    <div class="address-name" data-lang-key="maxlida_main_store">MAXLIDA Main Store</div>
+                    <div class="address-details">6, Jln Dato Undang Johol, Kampung Kuala Dioh, 72100 Bahau, Negeri Sembilan</div>
+                    <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                        <span data-lang-key="operating_hours">Operating Hours</span>: 9:00 AM - 10:00 PM
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-section">
+            <div class="section-title">
+                <span data-lang-key="products_ordered">Products Ordered</span>
+            </div>
+            <table class="product-list">
+                <thead>
+                    <tr>
+                        <th data-lang-key="product">Product</th>
+                        <th data-lang-key="unit_price">Unit Price</th>
+                        <th data-lang-key="quantity">Quantity</th>
+                        <th data-lang-key="total_price">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <img src="images/premium_notebook1.png" alt="Product" class="product-image">
+                                <div class="product-details" style="margin-left: 15px;">
+                                    <h4>Premium Hardcover Notebook</h4>
+                                    <p>Variation: A5 Black</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="product-price">RM27.00</td>
+                        <td>1</td>
+                        <td class="product-price">RM27.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div style="padding: 10px; background-color: #f9f9f9; border-radius: 4px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;" data-lang-key="product_care">Product Care Service Programme</div>
+                                <p style="margin: 0; font-size: 14px; color: #666;" data-lang-key="product_care_desc">Protect your purchase with coverage against damage, fire, flood, and theft with zero-cost, click-and-collect repair and free returns with same-day replacement, Repair/Replace, and Delivery Service.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="checkout-section">
+            <div class="section-title">
+                <span data-lang-key="payment_method">Payment Method</span>
+            </div>
+            <div class="payment-methods">
+                <div class="payment-method selected">
+                    <img src="images/fpx.png" alt="Online Banking">
+                    <p data-lang-key="online_banking">Online Banking</p>
+                </div>
+                <div class="payment-method">
+                    <img src="images/credit_debit.png" alt="Credit/Debit Card">
+                    <p data-lang-key="credit_debit_card">Credit/Debit Card</p>
+                </div>
+                <div class="payment-method">
+                    <img src="images/cod.png" alt="Cash on Delivery">
+                    <p data-lang-key="cash_on_delivery">Cash on Delivery</p>
+                </div>
+                <div class="payment-method">
+                    <img src="images/tng.png" alt="E-Wallet">
+                    <p data-lang-key="ewallet">TNG E-Wallet</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-section order-summary">
+            <div class="section-title">
+                <span data-lang-key="order_summary">Order Summary</span>
+            </div>
+            <div class="voucher-input">
+                <input type="text" id="voucher-input" placeholder="Enter voucher code" data-lang-key="voucher_placeholder">
+                <button id="apply-voucher" data-lang-key="apply">Apply</button>
+            </div>
+            <div id="voucher-applied" style="display: none; background-color: #f0f8ff; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1a73e8;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-weight: 500; color: #1a73e8;" data-lang-key="voucher_applied">Voucher Applied</span>
+                        <div style="font-size: 13px; color: #666; margin-top: 3px;">WELCOME10</div>
+                    </div>
+                    <span style="color: #1a73e8; font-weight: 500;">-RM2.70</span>
+                </div>
+            </div>
+            <div class="summary-row">
+                <span data-lang-key="merchandise_subtotal">Merchandise Subtotal</span>
+                <span>RM27.00</span>
+            </div>
+            <div class="summary-row">
+                <span data-lang-key="product_care_program">Product Care Program (1 item)</span>
+                <span>RM0.65</span>
+            </div>
+            <div class="summary-row">
+                <span data-lang-key="shipping_subtotal">Shipping Subtotal</span>
+                <span>RM4.90</span>
+            </div>
+            <div class="summary-row">
+                <span data-lang-key="shipping_fee">Shipping Fee (SST 6%)</span>
+                <span>RM0.29</span>
+            </div>
+            <div class="summary-row total">
+                <span data-lang-key="total_payment">Total Payment</span>
+                <span>RM31.64</span>
+            </div>
+            <div style="font-size: 12px; color: #666; margin-top: 10px; text-align: right;">
+                <span data-lang-key="order_tax">Order Tax (6% SST included, where applicable)</span>
+            </div>
+            <div style="font-size: 12px; color: #666; margin-top: 10px;">
+                <span data-lang-key="terms_agreement">By clicking "Place Order", you are agreeing to MAXLIDA's Product Protection</span>
+                <a href="#" style="color: #1a73e8; text-decoration: none;" data-lang-key="terms_conditions">Terms & Conditions</a>
+            </div>
+            <button class="checkout-btn" data-lang-key="place_order">Place Order</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center;">
+            <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
+                <div class="footer-section">
+                    <h3 data-lang-key="customer_service">Customer Service</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+                        <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+                        <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
+                        <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
+                        <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="about_us">About Us</a></li>
+                        <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
+                        <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
+                        <li><a href="#" data-lang-key="careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="payment">Payment</h3>
+                    <div class="payment-icons" style="text-align: center;">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="follow_us">Follow Us</h3>
+                    <div class="social-icons" style="text-align: center;">
+                        <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
+                <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="language.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language
+            updateLanguage();
+
+            // Language switcher
+            const languageToggle = document.querySelector('.language-toggle');
+            const languageOptions = document.querySelector('.language-options');
+            const languageOptionLinks = document.querySelectorAll('.language-option');
+            const currentLangSpan = document.querySelector('.current-lang');
+
+            if (languageToggle) {
+                languageToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+
+            languageOptionLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    localStorage.setItem('language', lang);
+                    currentLangSpan.textContent = lang === 'english' ? 'English' : 'Bahasa Melayu';
+                    languageOptions.style.display = 'none';
+                    updateLanguage();
+                });
+            });
+
+            // Shipping method selection
+            const deliveryRadio = document.getElementById('delivery');
+            const pickupRadio = document.getElementById('pickup');
+            const deliverySection = document.getElementById('delivery-section');
+            const pickupSection = document.getElementById('pickup-section');
+            
+            deliveryRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    deliverySection.style.display = 'block';
+                    pickupSection.style.display = 'none';
+                    
+                    // Update shipping fee in order summary
+                    document.querySelector('.summary-row:nth-child(4) span:last-child').textContent = 'RM4.90';
+                    document.querySelector('.summary-row:nth-child(5) span:last-child').textContent = 'RM0.29';
+                    
+                    // Update total
+                    updateTotal();
+                }
+            });
+            
+            pickupRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    deliverySection.style.display = 'none';
+                    pickupSection.style.display = 'block';
+                    
+                    // Remove shipping fee in order summary
+                    document.querySelector('.summary-row:nth-child(4) span:last-child').textContent = 'RM0.00';
+                    document.querySelector('.summary-row:nth-child(5) span:last-child').textContent = 'RM0.00';
+                    
+                    // Update total
+                    updateTotal();
+                }
+            });
+            
+            function updateTotal() {
+                // Get merchandise subtotal
+                const merchandiseSubtotal = parseFloat(document.querySelector('.summary-row:nth-child(2) span:last-child').textContent.replace('RM', ''));
+                
+                // Get product care fee
+                const productCareFee = parseFloat(document.querySelector('.summary-row:nth-child(3) span:last-child').textContent.replace('RM', ''));
+                
+                // Get shipping fee
+                const shippingSubtotal = parseFloat(document.querySelector('.summary-row:nth-child(4) span:last-child').textContent.replace('RM', ''));
+                
+                // Get shipping tax
+                const shippingTax = parseFloat(document.querySelector('.summary-row:nth-child(5) span:last-child').textContent.replace('RM', ''));
+                
+                // Check if voucher is applied
+                let voucherDiscount = 0;
+                if (document.getElementById('voucher-applied').style.display === 'block') {
+                    voucherDiscount = 2.70; // 10% of merchandise subtotal (27.00)
+                }
+                
+                // Calculate total
+                const total = merchandiseSubtotal + productCareFee + shippingSubtotal + shippingTax - voucherDiscount;
+                
+                // Update total display
+                document.querySelector('.summary-row.total span:last-child').textContent = 'RM' + total.toFixed(2);
+            }
+
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Voucher code application
+            const applyVoucherBtn = document.getElementById('apply-voucher');
+            const voucherInput = document.getElementById('voucher-input');
+            const voucherApplied = document.getElementById('voucher-applied');
+            
+            applyVoucherBtn.addEventListener('click', function() {
+                const voucherCode = voucherInput.value.trim().toUpperCase();
+                if (voucherCode === 'WELCOME10' || voucherCode === 'MAXLIDA10') {
+                    voucherApplied.style.display = 'block';
+                    voucherInput.value = '';
+                    updateTotal();
+                    alert('Voucher applied successfully! 10% discount on merchandise subtotal.');
+                } else if (voucherCode) {
+                    alert('Invalid voucher code. Please try again.');
+                }
+            });
+            
+            // Place order button
+            const placeOrderBtn = document.querySelector('.checkout-btn');
+            if (placeOrderBtn) {
+                placeOrderBtn.addEventListener('click', function() {
+                    const shippingMethod = document.getElementById('delivery').checked ? 'Delivery' : 'In-Store Pickup';
+                    const hasVoucher = document.getElementById('voucher-applied').style.display === 'block';
+                    let message = 'Order placed successfully with ' + shippingMethod;
+                    if (hasVoucher) {
+                        message += ' and 10% discount voucher applied';
+                    }
+                    alert(message + '! Thank you for shopping with us.');
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+
+        function updateLanguage() {
+            const currentLang = localStorage.getItem('language') || 'english';
+            const currentLangSpan = document.querySelector('.current-lang');
+            
+            if (currentLangSpan) {
+                currentLangSpan.textContent = currentLang === 'english' ? 'English' : 'Bahasa Melayu';
+            }
+            
+            const elementsWithLangKey = document.querySelectorAll('[data-lang-key]');
+            elementsWithLangKey.forEach(function(element) {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[key]) {
+                    const text = currentLang === 'english' ? translations[key] : translationsMalay[key];
+                    if (text) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = text;
+                        } else {
+                            element.textContent = text;
+                        }
+                    }
+                }
+            });
+
+            const elementsWithLangAttr = document.querySelectorAll('[data-lang-attr]');
+            elementsWithLangAttr.forEach(function(element) {
+                const data = element.getAttribute('data-lang-attr').split(':');
+                if (data.length === 2) {
+                    const attr = data[0];
+                    const key = data[1];
+                    if (translations[key]) {
+                        const text = currentLang === 'english' ? translations[key] : translationsMalay[key];
+                        if (text) {
+                            element.setAttribute(attr, text);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

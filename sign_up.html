@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="signup_page_title">Sign Up</title>
+    <link rel="icon" href="/images/maxlida.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="language.js"></script>
+    <style>
+        /* Sign Up page specific styles */
+        .signup-container {
+            display: flex;
+            min-height: 100vh;
+            background-color: #1a73e8;
+        }
+        
+        .signup-branding {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .signup-branding img {
+            width: 180px;
+            margin-bottom: 2rem;
+        }
+        
+        .signup-branding h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .signup-form-container {
+            flex: 1;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .signup-form {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .signup-form h1 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .signup-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .signup-form input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        
+        .signup-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .signup-form button:hover {
+            background-color: #1a73e8;
+        }
+        
+        .signup-divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #999;
+        }
+        
+        .signup-divider::before,
+        .signup-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .signup-divider span {
+            padding: 0 10px;
+            font-size: 0.9rem;
+        }
+        
+        .social-signup {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .social-signup button {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .social-signup button:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .social-signup .facebook {
+            color: #1877f2;
+        }
+        
+        .social-signup .google {
+            color: #db4437;
+        }
+        
+        .terms-policy {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .terms-policy a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .login-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .header-signup {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: white;
+        }
+        
+        .header-signup .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-signup .logo img {
+            height: 30px;
+            margin-right: 5px;
+        }
+        
+        .header-signup .logo span {
+            color: #1a73e8;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .header-signup a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+            }
+            
+            .signup-branding {
+                padding: 2rem 1rem;
+            }
+            
+            .signup-form-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Simple Header -->
+    <div class="header-signup">
+        <div class="logo">
+            <a href="index.html"><img src="images/maxlida.png" alt="MAXLIDA Logo"></a>
+            <span data-lang-key="shop_name">MAXLIDA Stationery</span>
+        </div>
+        <div class="top-nav-right">
+            <div class="language-dropdown">
+                <a href="#" class="language-toggle"><i class="fas fa-globe"></i> <span class="current-lang">English</span></a>
+                <div class="language-options">
+                    <a href="#" class="language-option" data-lang="english">English</a>
+                    <a href="#" class="language-option" data-lang="malay">Bahasa Melayu</a>
+                </div>
+            </div>
+            <span class="divider">|</span>
+            <a href="#" data-lang-key="need_help">Need help?</a>
+        </div>
+    </div>
+
+    <!-- Sign Up Container -->
+    <div class="signup-container">
+        <!-- Left Side - Branding -->
+        <div class="signup-branding">
+            <img src="images/maxlida.png" alt="MAXLIDA Logo">
+            <h2 data-lang-key="login_tagline">The leading stationery shop in Malaysia</h2>
+            <p data-lang-key="login_description">Quality stationery products for work, school, and creativity</p>
+        </div>
+        
+        <!-- Right Side - Sign Up Form -->
+        <div class="signup-form-container">
+            <div class="signup-form">
+                <h1 data-lang-key="sign_up">Sign Up</h1>
+                
+                <form id="signupForm">
+                    <input type="text" placeholder="Email/Username/Phone" data-lang-key="login_placeholder" data-lang-attr="placeholder">
+                    <input type="password" placeholder="Password" data-lang-key="password_placeholder" data-lang-attr="placeholder">
+                    <button type="submit" data-lang-key="sign_up_button">SIGN UP</button>
+                </form>
+                
+                <div class="terms-policy">
+                    <span data-lang-key="terms_agreement">By signing up, you agree to MAXLIDA's</span>
+                    <a href="#" data-lang-key="terms_of_service">Terms of Service</a> &
+                    <a href="#" data-lang-key="privacy_policy">Privacy Policy</a>
+                </div>
+                
+                <div class="login-link">
+                    <span data-lang-key="have_account">Have an account?</span>
+                    <a href="login.html" data-lang-key="login">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center;">
+            <div class="footer-content" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
+                <div class="footer-section">
+                    <h3 data-lang-key="customer_service">Customer Service</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="help_center">Help Center</a></li>
+                        <li><a href="#" data-lang-key="how_to_buy">How to Buy</a></li>
+                        <li><a href="#" data-lang-key="shipping_delivery">Shipping & Delivery</a></li>
+                        <li><a href="#" data-lang-key="return_refund">Return & Refund</a></li>
+                        <li><a href="#" data-lang-key="contact_us">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="about_maxlida">About MAXLIDA</h3>
+                    <ul style="padding-left: 0; list-style-type: none; text-align: center;">
+                        <li><a href="#" data-lang-key="about_us">About Us</a></li>
+                        <li><a href="#" data-lang-key="privacy_policy">Privacy Policy</a></li>
+                        <li><a href="#" data-lang-key="terms_conditions">Terms & Conditions</a></li>
+                        <li><a href="#" data-lang-key="careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="payment">Payment</h3>
+                    <div class="payment-icons" style="text-align: center;">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="follow_us">Follow Us</h3>
+                    <div class="social-icons" style="text-align: center;">
+                        <a href="https://www.facebook.com/p/MAX-LIDA-100069366986077/" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/maxlidaent/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 20px;">
+                <p>&copy; 2025 MAXLIDA Stationery Shop. <span data-lang-key="all_rights_reserved">All Rights Reserved</span>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update language on page load
+            const currentLang = localStorage.getItem('language') || 'english';
+            updateLanguage(currentLang);
+            
+            // Handle signup form submission
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically handle the signup process
+                // For now, we'll just redirect to the home page
+                window.location.href = 'index.html';
+            });
+
+            // Language switching functionality
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    updateLanguage(lang);
+                    document.querySelector('.current-lang').textContent = lang === 'english' ? 'English' : 'Bahasa Melayu';
+                });
+            });
+        });
+
+        // Language switching function
+        function updateLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                const attrName = element.getAttribute('data-lang-attr');
+                if (translations[lang] && translations[lang][key]) {
+                    if (attrName) {
+                        element.setAttribute(attrName, translations[lang][key]);
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            localStorage.setItem('language', lang);
+        }
+    </script>
+</body>
+</html>
