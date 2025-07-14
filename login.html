@@ -12,7 +12,6 @@
     />
     <script src="language.js"></script>
     <style>
-      /* Login page specific styles */
       .login-container {
         display: flex;
         min-height: 100vh;
@@ -127,6 +126,17 @@
         text-decoration: none;
         font-size: 0.9rem;
       }
+      #nav-profile {
+        display: none;
+        align-items: center;
+        gap: 10px;
+      }
+      #profile-link {
+        color: #1a73e8;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
       @media (max-width: 768px) {
         .login-container {
           flex-direction: column;
@@ -149,21 +159,23 @@
         /></a>
         <span data-lang-key="shop_name">MAXLIDA Stationery</span>
       </div>
+      <!-- Auth links -->
       <div class="top-nav-right">
-        <div class="language-dropdown">
-          <a href="#" class="language-toggle"
-            ><i class="fas fa-globe"></i>
-            <span class="current-lang">English</span></a
+        <span id="nav-auth">
+          <a href="sign_up.html" id="signup-link">Sign Up</a> |
+          <a href="login.html" id="login-link">Login</a>
+        </span>
+        <span id="nav-profile" style="display: none">
+          <i class="fas fa-user"></i>
+          <span id="profile-username"></span>
+          <a href="#" id="logout-link" style="margin-left: 10px; color: #e53935"
+            >Logout</a
           >
-          <div class="language-options">
-            <a href="#" class="language-option" data-lang="english">English</a>
-            <a href="#" class="language-option" data-lang="malay"
-              >Bahasa Melayu</a
-            >
-          </div>
-        </div>
-        <span class="divider">|</span>
-        <a href="#" data-lang-key="need_help">Need help?</a>
+        </span>
+      </div>
+      <!-- Profile link (hidden by default) -->
+      <div class="top-nav-right" id="nav-profile">
+        <a href="#" id="profile-link">Profile</a>
       </div>
     </div>
 
@@ -316,6 +328,34 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Show/hide nav links based on login status
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const navAuth = document.getElementById("nav-auth");
+        const navProfile = document.getElementById("nav-profile");
+        const profileUsername = document.getElementById("profile-username");
+        if (loggedInUser) {
+          if (navAuth) navAuth.style.display = "none";
+          if (navProfile) navProfile.style.display = "inline-flex";
+          try {
+            const userObj = JSON.parse(loggedInUser);
+            if (profileUsername)
+              profileUsername.textContent = userObj.username || "";
+          } catch {}
+        } else {
+          if (navAuth) navAuth.style.display = "inline";
+          if (navProfile) navProfile.style.display = "none";
+        }
+
+        // Logout functionality
+        const logoutLink = document.getElementById("logout-link");
+        if (logoutLink) {
+          logoutLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            localStorage.removeItem("loggedInUser");
+            window.location.reload();
+          });
+        }
+
         // Update language on page load
         const currentLang = localStorage.getItem("language") || "english";
         if (typeof updateLanguage === "function") updateLanguage(currentLang);
