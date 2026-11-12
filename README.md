@@ -6,15 +6,11 @@ MaxLida is a fictional shop. The site's look is inspired by Shopee but adapted t
 
 > A group project. UiTM, 2025.
 
-<!-- Add screenshots here, for example:
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/screenshots/home.png" alt="Home" width="260"><br><em>Home</em></td>
-    <td align="center"><img src="docs/screenshots/checkout.png" alt="Checkout" width="260"><br><em>Checkout</em></td>
-    <td align="center"><img src="docs/screenshots/admin.png" alt="Admin dashboard" width="260"><br><em>Admin dashboard</em></td>
+    <td align="center"><img src="images/screenshot.png" alt="Home" width="260"><br><em>Home</em></td>
   </tr>
 </table>
--->
 
 ---
 
